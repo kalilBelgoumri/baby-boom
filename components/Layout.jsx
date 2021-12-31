@@ -1,6 +1,8 @@
 import Footer from "./Footer";
-import Header from "./Header";
 import Head from "next/head";
+import background from "../assets/background.jpg";
+import Image from "next/image";
+
 
 const Layout = ({ children, page }) => {
   return (
@@ -8,8 +10,11 @@ const Layout = ({ children, page }) => {
       <Head>
         <title>{page}</title>
       </Head>
-      <Header name={page} />
-      <main className="flex-1">{children}</main> 
+      <header className="bg-white w-full h-50 z-10">
+
+     <Image img src={background} alt="background" property="responsive" />
+      </header>
+      <main className="flex-1">{children}</main>
       <Footer />
     </div>
   );
