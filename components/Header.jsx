@@ -18,9 +18,6 @@ const Header = ({ name }) => {
         <li className="hover:text-red-700 transform transition-all delay-200">
           <Link href="/Contact"> Me contacter </Link>
         </li>
-        <li className="hover:text-red-700 transform transition-all delay-200">
-          <Link href="/AdminLayout">Admin </Link>
-        </li>
       </ul>
     </div>
   );
