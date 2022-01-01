@@ -11,12 +11,11 @@ export default function Home({ data }) {
     <>
       <Layout page="Home flex relative">
         <div className="test flex justify-center">
-          <div className="absolute z-50 mt-10 ">
+          <div className="absolute z-50 mt-10 w-[80%] md:w-[70%]">
             <Search />
           </div>
           <Image
             className="z-10"
-            img
             src={background}
             alt="background"
             property="responsive"

@@ -2,8 +2,10 @@ import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
+import { useState } from "react";
 
 export default function Search() {
+  const [search, setSearch] = useState("");
   return (
     <Paper
       component="form"
@@ -12,7 +14,6 @@ export default function Search() {
         display: "flex",
         alignItems: "center",
         justifyCenter: "center",
-        width: 400,
         borderRadius: 8,
       }}
     >
@@ -20,8 +21,10 @@ export default function Search() {
       <InputBase
         sx={{ flex: 1, justifyItems: "center", textAlign: "center" }}
         placeholder="Chercher une Baby sitter"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
         inputProps={{ "aria-label": "search google maps" }}
-      />
+        />
       <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
         <SearchIcon />
       </IconButton>
