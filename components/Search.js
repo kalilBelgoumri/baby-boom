@@ -17,9 +17,9 @@ export default function Search() {
         borderRadius: 8,
       }}
     >
-      <IconButton sx={{ p: "10px" }} aria-label="menu"></IconButton>
+      <IconButton sx={{ p: "10px" }} aria-label="menu" />
       <InputBase
-        sx={{ flex: 1, justifyItems: "center", textAlign: "center" }}
+        sx={{ flex: 1, justifyItems: "center", textAlign: "center",border:'red' }}
         placeholder="Chercher une Baby sitter"
         value={search}
         onChange={(e) => setSearch(e.target.value)}

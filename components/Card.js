@@ -1,8 +1,13 @@
-export default function Card({ title, img }) {
+import * as React from "react";
+import Card from "@mui/material/Card";
+import { CardActionArea } from "@mui/material";
+import Image from "next/image";
+export default function CardIndex({ img }) {
   return (
-    <>
-      <h1>{title}</h1>
-      <img src={img} alt="image" />
-    </>
+    <Card className="w-[70%] rounded-lg">
+      <CardActionArea>
+        <Image src={img} property="responsive" />
+      </CardActionArea>
+    </Card>
   );
 }
