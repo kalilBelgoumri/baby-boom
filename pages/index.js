@@ -4,8 +4,13 @@ import { useState } from "react";
 import Search from "../components/Search";
 import background from "../assets/background.jpg";
 import Image from "next/image";
+import { v4 as uuid } from "uuid";
+import group from "../assets/group.svg";
+import messages from "../assets/messages.png";
 
 export default function Home() {
+  const unique_id = uuid();
+
   const city = [
     {
       id: 1,
@@ -24,6 +29,31 @@ export default function Home() {
     },
     {
       id: 4,
+      title: "marseille",
+      image: "https://i.ibb.co/TWnKkmL/11098467.jpg",
+    },
+    {
+      id: 5,
+      title: "marseille",
+      image: "https://i.ibb.co/TWnKkmL/11098467.jpg",
+    },
+    {
+      id: 6,
+      title: "marseille",
+      image: "https://i.ibb.co/TWnKkmL/11098467.jpg",
+    },
+    {
+      id: 7,
+      title: "marseille",
+      image: "https://i.ibb.co/TWnKkmL/11098467.jpg",
+    },
+    {
+      id: 8,
+      title: "marseille",
+      image: "https://i.ibb.co/TWnKkmL/11098467.jpg",
+    },
+    {
+      id: 9,
       title: "marseille",
       image: "https://i.ibb.co/TWnKkmL/11098467.jpg",
     },
@@ -49,7 +79,8 @@ export default function Home() {
               <div className="flex flex-shrink-0 relative ml-3 snap-center">
                 <li key={citys.id}></li>
                 <img
-                  className="rounded-lg object-cover object-bottom w-48  md:w-52"
+                  className="rounded-lg cursor-pointer hover:transition-opacity delay-300 object-cover object-bottom w-36 h-36
+                    md:w-52 md:h-52 lg:w-60 lg:h-60"
                   src={citys.image}
                   alt="paris"
                 ></img>
@@ -58,18 +89,22 @@ export default function Home() {
           })}
         </ul>
 
-        <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestiae
-          amet, magnam voluptatibus quasi non molestias maiores consequuntur
-          quisquam ipsa iste quam, esse voluptas inventore, unde facilis
-          provident qui quidem! Ad.
+        <p className="text-center text-xl sm:text-3xl">
+          Votre recherche de Baby-sitter simplifié
         </p>
-        {/* <div className="card flex justify-around mt-10">
-          <CardIndex img={lyon} />
-          <CardIndex img={marseille} />
-          <CardIndex img={marseille} />
-          <CardIndex img={paris} />
-        </div> */}
+        <div className="flex justify-center items-center mb-10">
+          <Image src={group} height="100" width="100" />
+        </div>
+        <p className="text-center text-xl sm:text-3xl mb-10">
+          Publier une annonce gratuitement
+        </p>
+        <p className="text-center text-xl sm:text-3xl mb-10">
+          Partager ce dont vous avez besoin pour que les bonnes personnes vous
+          trouvent
+        </p>
+        <div className="flex justify-center items-center mb-10">
+          <Image src={messages}  />
+        </div>
       </Layout>
     </>
   );
