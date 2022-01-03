@@ -4,12 +4,12 @@ import { useState } from "react";
 import Search from "../components/Search";
 import background from "../assets/background.jpg";
 import Image from "next/image";
-import { v4 as uuid } from "uuid";
 import group from "../assets/group.svg";
 import messages from "../assets/messages.png";
+import { useRouter } from "next/router";
 
 export default function Home() {
-  const unique_id = uuid();
+  const router = useRouter();
 
   const city = [
     {
@@ -103,7 +103,18 @@ export default function Home() {
           trouvent
         </p>
         <div className="flex justify-center items-center mb-10">
-          <Image src={messages}  />
+          <Image src={messages} />
+        </div>
+        <div className="flex flex-col justify-center items-center">
+          <button className="text-black text-lg h-16 py-2 px-8 cursor-pointer bg-purple-600 rounded-lg mb-5">
+            Trouver votre Baby-Sitter
+          </button>
+          <button
+            onClick={() => router.push("/Baby")}
+            className="text-black text-lg h-16 py-2 px-16 cursor-pointer rounded-lg shadow-lg shadow-blue-500/40 hover:shadow-indigo-500/40 "
+          >
+            Je suis baby-sitter
+          </button>
         </div>
       </Layout>
     </>
