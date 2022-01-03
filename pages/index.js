@@ -94,7 +94,7 @@ export default function Home() {
         <div className="flex justify-center items-center mb-10">
           <Image src={group} height="100" width="100" />
         </div>
-        <p className="text-center text-xl sm:text-3xl mb-10">
+        <p className="text-center text-xl sm:text-3xl mb-10 font-body">
           Publier une annonce gratuitement
         </p>
         <p className="text-center text-xl sm:text-3xl mb-10">
@@ -107,7 +107,7 @@ export default function Home() {
         <div className="flex flex-col justify-center items-center">
           <button
             onClick={() => router.push("/Baby")}
-            className="text-black text-lg h-16 py-2 px-8 cursor-pointer bg-[#B538A8] rounded-lg mb-5"
+            className="text-black text-lg h-16 py-2 px-8 cursor-pointer bg-[#B538A8] rounded-lg mb-5 font-body"
           >
             Trouver votre Baby-Sitter
           </button>
