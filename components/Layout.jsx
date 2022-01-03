@@ -4,8 +4,10 @@ import Head from "next/head";
 import Image from "next/image";
 import { Twirl as Hamburger } from "hamburger-react";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 const Layout = ({ children, page }) => {
+  const router = useRouter();
   const [isOpen, setOpen] = useState(false);
   const [show, setShow] = useState(false);
 
@@ -21,10 +23,16 @@ const Layout = ({ children, page }) => {
             <Hamburger toggled={isOpen} toggle={setOpen} />
           </div>
           <div className="button flex justify-end">
-            <button className="text-black text-xs py-2 px-4 bg-purple-600 rounded-lg mr-3">
+            <button
+              onClick={() => router.push("/logIn")}
+              className="text-black text-xs py-2 px-4 bg-[#B538A8] rounded-lg mr-3"
+            >
               Connexion
             </button>
-            <button className="text-black text-xs py-2 px-4 rounded-lg mr-2 shadow-lg shadow-blue-500/40 hover:shadow-indigo-500/40 ">
+            <button
+              onClick={() => router.push("/register")}
+              className="text-black text-xs py-2 px-4 rounded-lg mr-2 shadow-lg shadow-blue-500/40 hover:shadow-indigo-500/40 "
+            >
               S'enregistrer
             </button>
           </div>

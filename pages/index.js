@@ -79,8 +79,8 @@ export default function Home() {
               <div className="flex flex-shrink-0 relative ml-3 snap-center">
                 <li key={citys.id}></li>
                 <img
-                  className="rounded-lg cursor-pointer hover:transition-opacity delay-300 object-cover object-bottom w-36 h-36
-                    md:w-52 md:h-52 lg:w-60 lg:h-60"
+                  className="rounded-lg cursor-pointer hover:transition-opacity delay-300 object-cover object-bottom w-40 h-36
+                    md:w-56 md:h-56 lg:w-60 lg:h-60"
                   src={citys.image}
                   alt="paris"
                 ></img>
@@ -88,7 +88,6 @@ export default function Home() {
             );
           })}
         </ul>
-
         <p className="text-center text-xl sm:text-3xl">
           Votre recherche de Baby-sitter simplifié
         </p>
@@ -106,12 +105,15 @@ export default function Home() {
           <Image src={messages} />
         </div>
         <div className="flex flex-col justify-center items-center">
-          <button className="text-black text-lg h-16 py-2 px-8 cursor-pointer bg-purple-600 rounded-lg mb-5">
+          <button
+            onClick={() => router.push("/Baby")}
+            className="text-black text-lg h-16 py-2 px-8 cursor-pointer bg-[#B538A8] rounded-lg mb-5"
+          >
             Trouver votre Baby-Sitter
           </button>
           <button
             onClick={() => router.push("/Baby")}
-            className="text-black text-lg h-16 py-2 px-16 cursor-pointer rounded-lg shadow-lg shadow-blue-500/40 hover:shadow-indigo-500/40 "
+            className="text-black text-lg h-16 py-2 px-16 cursor-pointer rounded-lg shadow-lg shadow-blue-500/40 hover:shadow-indigo-500/40 mb-5"
           >
             Je suis baby-sitter
           </button>
