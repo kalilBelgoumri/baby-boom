@@ -7,6 +7,7 @@ import Image from "next/image";
 import group from "../assets/group.svg";
 import messages from "../assets/messages.png";
 import { useRouter } from "next/router";
+import CardMedia from "../components/CardMedia";
 
 export default function Home() {
   const router = useRouter();
@@ -118,6 +119,26 @@ export default function Home() {
             Je suis baby-sitter
           </button>
         </div>
+
+        <div className=" divide-y divide-blue-200" />
+        <p className="text-center text-xl sm:text-3xl mb-10 mt-10">
+          Nos BABY-STTERS
+        </p>
+        <div className="flex flex-shrink-0 gap-5 snap-x overflow-x-auto px-4 mb-10">
+          <CardMedia
+            image="https://i.ibb.co/TWnKkmL/11098467.jpg"
+            typo="coucou"
+          />
+              <CardMedia
+            image="https://i.ibb.co/TWnKkmL/11098467.jpg"
+            typo="coucou"
+          />
+              <CardMedia
+            image="https://i.ibb.co/TWnKkmL/11098467.jpg"
+            typo="coucou"
+          />
+        </div>
+
       </Layout>
     </>
   );
