@@ -120,25 +120,57 @@ export default function Home() {
           </button>
         </div>
 
-        <div className=" divide-y divide-blue-200" />
         <p className="text-center text-xl sm:text-3xl mb-10 mt-10">
           Nos BABY-STTERS
         </p>
-        <div className="flex flex-shrink-0 gap-5 snap-x overflow-x-auto px-4 mb-10">
-          <CardMedia
-            image="https://i.ibb.co/TWnKkmL/11098467.jpg"
-            typo="coucou"
-          />
-              <CardMedia
-            image="https://i.ibb.co/TWnKkmL/11098467.jpg"
-            typo="coucou"
-          />
-              <CardMedia
-            image="https://i.ibb.co/TWnKkmL/11098467.jpg"
-            typo="coucou"
-          />
+        <div className="flex gap-5 snap-x overflow-x-auto px-4 mb-10">
+          <div className="snap-center relative flex gap-5">
+            <CardMedia
+              image="https://i.ibb.co/TWnKkmL/11098467.jpg"
+              typo="Francoise 42 ans"
+              typoCity="Lyon"
+            />
+            <CardMedia
+              image="https://i.ibb.co/TWnKkmL/11098467.jpg"
+              typo="Sandra 28 ans"
+              typoCity="Paris"
+            />
+            <CardMedia
+              image="https://i.ibb.co/TWnKkmL/11098467.jpg"
+              typo="Christelle 33 ans"
+              typoCity="Marseille"
+            />
+            <CardMedia
+              image="https://i.ibb.co/TWnKkmL/11098467.jpg"
+              typo="Christelle 33 ans"
+              typoCity="Marseille"
+            />
+          </div>
         </div>
-
+        <div className="flex gap-5 snap-x overflow-x-auto px-4 mb-10">
+          <div className="snap-center relative flex gap-5">
+            <CardMedia
+              image="https://i.ibb.co/TWnKkmL/11098467.jpg"
+              typo="Francoise 42 ans"
+              typoCity="Lyon"
+            />
+            <CardMedia
+              image="https://i.ibb.co/TWnKkmL/11098467.jpg"
+              typo="Sandra 28 ans"
+              typoCity="Paris"
+            />
+            <CardMedia
+              image="https://i.ibb.co/TWnKkmL/11098467.jpg"
+              typo="Christelle 33 ans"
+              typoCity="Marseille"
+            />
+            <CardMedia
+              image="https://i.ibb.co/TWnKkmL/11098467.jpg"
+              typo="Christelle 33 ans"
+              typoCity="Marseille"
+            />
+          </div>
+        </div>
       </Layout>
     </>
   );
