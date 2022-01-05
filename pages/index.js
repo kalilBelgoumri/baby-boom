@@ -12,6 +12,7 @@ import CardMedia from "../components/CardMedia";
 export default function Home() {
   const router = useRouter();
 
+  // Card city
   const city = [
     {
       id: 1,
@@ -123,8 +124,10 @@ export default function Home() {
         <p className="text-center text-xl sm:text-3xl mb-10 mt-10">
           Nos BABY-STTERS
         </p>
+
+        {/* Baby-sitters */}
         <div className="flex gap-5 snap-x overflow-x-auto px-4 mb-10">
-          <div className="snap-center relative flex gap-5">
+          <div className="snap-start relative flex gap-5">
             <CardMedia
               image="https://i.ibb.co/TWnKkmL/11098467.jpg"
               typo="Francoise 42 ans"
@@ -147,25 +150,25 @@ export default function Home() {
             />
           </div>
         </div>
-        <div className="flex gap-5 snap-x overflow-x-auto px-4 mb-10">
-          <div className="snap-center relative flex gap-5">
+        <div className="flex snap-x overflow-x-auto mb-10">
+          <div className="snap-start relative flex gap-3 object-cover object-bottom px-5">
             <CardMedia
-              image="https://i.ibb.co/TWnKkmL/11098467.jpg"
+              image="assets/christelle.jpg"
               typo="Francoise 42 ans"
               typoCity="Lyon"
             />
             <CardMedia
-              image="https://i.ibb.co/TWnKkmL/11098467.jpg"
+              image="assets/victoria.jpg"
               typo="Sandra 28 ans"
               typoCity="Paris"
             />
             <CardMedia
-              image="https://i.ibb.co/TWnKkmL/11098467.jpg"
+              image="assets/christelle.jpg"
               typo="Christelle 33 ans"
               typoCity="Marseille"
             />
             <CardMedia
-              image="https://i.ibb.co/TWnKkmL/11098467.jpg"
+              image="assets/victoria.jpg"
               typo="Christelle 33 ans"
               typoCity="Marseille"
             />

@@ -1,15 +1,22 @@
 import Footer from "./Footer";
 import Head from "next/head";
 // import background from "../assets/background.jpg";
-import Image from "next/image";
 import { Twirl as Hamburger } from "hamburger-react";
-import { useState } from "react";
+import { useState , useEffect } from "react";
 import { useRouter } from "next/router";
+import firebase from "../firebase/firebase";
+
 
 const Layout = ({ children, page }) => {
   const router = useRouter();
   const [isOpen, setOpen] = useState(false);
   const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    if (!firebase.isLoggedIN()) {
+      router.push("/login");
+    }
+  });
 
   return (
     <div className="flex flex-col h-screen">
@@ -24,7 +31,7 @@ const Layout = ({ children, page }) => {
           </div>
           <div className="button flex justify-end">
             <button
-              onClick={() => router.push("/logIn")}
+              onClick={() => router.push("/login")}
               className="text-black text-xs py-2 px-4 bg-[#B538A8] rounded-lg mr-3"
             >
               Connexion
@@ -44,7 +51,7 @@ const Layout = ({ children, page }) => {
         {/* Backgound */}
         {/* <Image img src={background} alt="background" property="responsive" /> */}
       </header>
-      <main className="flex-1">{children}</main>
+      <main className="flex-1">{children} </main>
       <Footer />
     </div>
   );
