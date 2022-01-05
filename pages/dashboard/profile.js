@@ -24,7 +24,7 @@ export default function profile() {
                   <DeleteOutlined
                     key="delete"
                     onClick={async () => {
-                      var trytodelete = await firebase.deleteAccount();
+                      let trytodelete = await firebase.deleteAccount();
                       if (trytodelete) {
                         message.success("User deleted");
                         Router.push("/create-account");
