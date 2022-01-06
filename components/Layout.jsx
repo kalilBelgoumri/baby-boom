@@ -2,22 +2,29 @@ import Footer from "./Footer";
 import Head from "next/head";
 // import background from "../assets/background.jpg";
 import { Twirl as Hamburger } from "hamburger-react";
-import { useState , useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import firebase from "../firebase/firebase";
-
 
 const Layout = ({ children, page }) => {
   const router = useRouter();
   const [isOpen, setOpen] = useState(false);
-  const [show, setShow] = useState(false);
+  // const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    if (!firebase.isLoggedIN()) {
-      router.push("/login");
-    }
-  });
+  const user = firebase.auth.currentUser;
+  if (user !== null) {
+    // The user object has basic properties such as display name, email, etc.
+    const displayName = user.displayName;
+    const email = user.email;
+    const photoURL = user.photoURL;
+    const emailVerified = user.emailVerified;
 
+    // The user's ID, unique to the Firebase project. Do NOT use
+    // this value to authenticate with your backend server, if
+    // you have one. Use User.getToken() instead.
+    const uid = user.uid;
+    console.log(user);
+  }
   return (
     <div className="flex flex-col h-screen">
       <Head>
@@ -30,18 +37,27 @@ const Layout = ({ children, page }) => {
             <Hamburger toggled={isOpen} toggle={setOpen} />
           </div>
           <div className="button flex justify-end">
-            <button
-              onClick={() => router.push("/login")}
-              className="text-black text-xs py-2 px-4 bg-[#B538A8] rounded-lg mr-3"
-            >
-              Connexion
-            </button>
-            <button
-              onClick={() => router.push("/register")}
-              className="text-black text-xs py-2 px-4 rounded-lg mr-2 shadow-lg shadow-blue-500/40 hover:shadow-indigo-500/40 "
-            >
-              S'enregistrer
-            </button>
+            {!firebase.isLoggedIN() && (
+              <button
+                onClick={() => router.push("/login")}
+                className="text-black text-xs py-2 px-4 bg-[#B538A8] rounded-lg mr-3"
+              >
+                Connexion
+              </button>
+            )}
+            <div className="displayName flex justify-center items-center ">
+              {firebase.isLoggedIN() && (
+                <p className="text-md flex"> {`${user.displayName}`} </p>
+              )}
+            </div>
+            {!firebase.isLoggedIN() && (
+              <button
+                onClick={() => router.push("/register")}
+                className="text-black text-xs py-2 px-4 rounded-lg mr-2 shadow-lg shadow-blue-500/40 hover:shadow-indigo-500/40 "
+              >
+                S'enregistrer
+              </button>
+            )}
           </div>
         </div>
         {/* <div className={`"hamburgerOpen flex bg-orange-500 w-full items-center justify-end cursor-pointer"

@@ -3,9 +3,17 @@ import { Form, Input, Button, message } from "antd";
 import { MailOutlined, LockOutlined, UserOutlined } from "@ant-design/icons";
 import firebase from "../firebase/firebase";
 import Router from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function signup() {
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  if (password !== confirmPassword) {
+    console.log("error");
+  } else {
+    console.log("ok");
+  }
   useEffect(() => {
     if (firebase.isLoggedIN()) {
       Router.push("/dashboard");
@@ -53,9 +61,23 @@ export default function signup() {
               prefix={<LockOutlined />}
               type="password"
               placeholder="Password"
+              onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Item>
-
+          <Form.Item
+            value={password}
+            name="confirmPassword"
+            rules={[{ required: true, message: "" }]}
+          >
+            <Input
+              value={confirmPassword}
+              size="large"
+              prefix={<LockOutlined />}
+              type="password"
+              placeholder="Confirm Password"
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+          </Form.Item>
           <Form.Item>
             <Button size="large" type="primary" htmlType="submit" block>
               Signup

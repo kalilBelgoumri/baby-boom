@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useAuth } from "../../context/AuthUserContext";
 
 export default function Home() {
   const [email, setEmail] = useState("");

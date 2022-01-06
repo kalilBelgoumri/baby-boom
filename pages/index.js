@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Layout from "../components/Layout";
-import { useState } from "react";
+import { useState ,useEffect } from "react";
 import Search from "../components/Search";
 import background from "../assets/background.jpg";
 import Image from "next/image";
@@ -11,6 +11,12 @@ import CardMedia from "../components/CardMedia";
 
 export default function Home() {
   const router = useRouter();
+
+  // useEffect(() => {
+  //   if (firebase.isLoggedIN()) {
+  //     router.push("/dashboard");
+  //   }
+  // }, []);
 
   // Card city
   const city = [
