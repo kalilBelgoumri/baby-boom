@@ -47,7 +47,10 @@ const Layout = ({ children, page }) => {
             )}
             <div className="displayName flex justify-center items-center ">
               {firebase.isLoggedIN() && (
-                <p className="text-md flex"> {`${user.displayName}`} </p>
+                <p className="text-md flex">
+                  {" "}
+                  Bonjour {`${user.displayName}`}{" "}
+                </p>
               )}
             </div>
             {!firebase.isLoggedIN() && (
@@ -56,6 +59,17 @@ const Layout = ({ children, page }) => {
                 className="text-black text-xs py-2 px-4 rounded-lg mr-2 shadow-lg shadow-blue-500/40 hover:shadow-indigo-500/40 "
               >
                 S'enregistrer
+              </button>
+            )}
+            {firebase.isLoggedIN() && (
+              <button className="py-2 px-5 bg-red-700 rounded-lg"
+                onClick={async () => {
+                  // Logout
+                  await firebase.logout();
+                  router.push("/login");
+                }}
+              >
+                Logout
               </button>
             )}
           </div>

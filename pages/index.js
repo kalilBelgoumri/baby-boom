@@ -12,12 +12,6 @@ import CardMedia from "../components/CardMedia";
 export default function Home() {
   const router = useRouter();
 
-  // useEffect(() => {
-  //   if (firebase.isLoggedIN()) {
-  //     router.push("/dashboard");
-  //   }
-  // }, []);
-
   // Card city
   const city = [
     {
