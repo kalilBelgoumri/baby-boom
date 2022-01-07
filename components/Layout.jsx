@@ -14,17 +14,13 @@ const Layout = ({ children, page }) => {
   const user = firebase.auth.currentUser;
   if (user !== null) {
     // The user object has basic properties such as display name, email, etc.
-    const displayName = user.displayName;
-    const email = user.email;
-    const photoURL = user.photoURL;
-    const emailVerified = user.emailVerified;
-
-    // The user's ID, unique to the Firebase project. Do NOT use
-    // this value to authenticate with your backend server, if
-    // you have one. Use User.getToken() instead.
-    const uid = user.uid;
-    console.log(user);
+    user.displayName;
+    user.email;
+    user.photoURL;
+    user.emailVerified;
+    user.uid;
   }
+  console.log(user);
   return (
     <div className="flex flex-col h-screen">
       <Head>
@@ -62,11 +58,12 @@ const Layout = ({ children, page }) => {
               </button>
             )}
             {firebase.isLoggedIN() && (
-              <button className="py-2 px-5 bg-red-700 rounded-lg"
+              <button
+                className="py-2 px-5 bg-red-700 rounded-lg"
                 onClick={async () => {
                   // Logout
                   await firebase.logout();
-                  router.push("/login");
+                  router.push("/");
                 }}
               >
                 Logout

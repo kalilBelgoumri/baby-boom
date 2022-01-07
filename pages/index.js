@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Layout from "../components/Layout";
-import { useState ,useEffect } from "react";
+import { useState, useEffect } from "react";
 import Search from "../components/Search";
 import background from "../assets/background.jpg";
 import Image from "next/image";
@@ -9,9 +9,16 @@ import messages from "../assets/messages.png";
 import { useRouter } from "next/router";
 import CardMedia from "../components/CardMedia";
 
+
+
 export default function Home() {
   const router = useRouter();
+  const uniqid = require('uniqid'); 
+  console.log(uniqid())
 
+
+
+  
   // Card city
   const city = [
     {
@@ -68,18 +75,13 @@ export default function Home() {
           <div className="absolute z-50 mt-10 w-[80%] md:w-[70%]">
             <Search />
           </div>
-          <Image
-            className="z-10"
-            src={background}
-            alt="background"
-            property="responsive"
-          />
+          <Image className="z-10" src={background} alt="test"></Image>
         </div>
         <ul className="flex w-full gap-2 overflow-x-auto mt-10 mb-10 snap-x">
           {city.map((citys) => {
             return (
               <div className="flex flex-shrink-0 relative ml-3 snap-center">
-                <li key={citys.id}></li>
+                <li key={citys.uniqid}></li>
                 <img
                   className="rounded-lg cursor-pointer hover:transition-opacity delay-300 object-cover object-bottom w-40 h-36
                     md:w-56 md:h-56 lg:w-60 lg:h-60"

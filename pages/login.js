@@ -4,9 +4,10 @@ import { MailOutlined, LockOutlined } from "@ant-design/icons";
 import firebase from "../firebase/firebase";
 import Router from "next/router";
 import { useEffect } from "react";
+import background from "../assets/login.jpg";
+import Image from "next/image";
 
 export default function login() {
-
   useEffect(() => {
     if (firebase.isLoggedIN()) {
       Router.push("/dashboard");
@@ -35,7 +36,11 @@ export default function login() {
       <Head>
         <title>Login | Baby-Boom</title>
       </Head>
-      <main className="fullscreenflexmiddle">
+      <div className="background mb-10">
+        <Image src={background} alt="test" layout="responsive" sizes="100vw" />
+      </div>
+
+      <main className="flex flex-col items-center justify-center">
         <h2 style={{ fontSize: 25, marginBottom: 30 }}>Login</h2>
         <Form
           name="login"
@@ -63,7 +68,7 @@ export default function login() {
               className="login-form-button"
               block
             >
-              Log in
+              Log In
             </Button>
           </Form.Item>
         </Form>
