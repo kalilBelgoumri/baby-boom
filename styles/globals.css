@@ -2,3 +2,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.ant-input-affix-wrapper {
+    border-radius: 10px !important;
+}
+
+.login-form-button {
+    border-radius: 10px !important
+}

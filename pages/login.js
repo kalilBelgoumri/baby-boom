@@ -3,16 +3,39 @@ import { Form, Input, Button, message } from "antd";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
 import firebase from "../firebase/firebase";
 import Router from "next/router";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import background from "../assets/login.jpg";
 import Image from "next/image";
+import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
+import { Checkbox } from "antd";
 
 export default function login() {
+  const [colors, setColors] = useState("");
+  const [email, setEmail] = useState("");
+
+  function sendPasswordReset() {
+    const email = "kalil90100@gmail.com";
+    // [START auth_send_password_reset]
+    firebase.auth.sendPasswordResetEmail(email)
+      .then(() => {
+        message.success({ key: "Password", content: "Veuillez reinitialiser votre mot de passe recue dans votre boite email ! :)" });
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // ..
+      }) 
+    }
+
   useEffect(() => {
     if (firebase.isLoggedIN()) {
       Router.push("/dashboard");
     }
   }, []);
+
+  function onChange(e) {
+    console.log(`checked = ${e.target.checked}`);
+  }
 
   // Login
   async function doLogin(values) {
@@ -36,12 +59,11 @@ export default function login() {
       <Head>
         <title>Login | Baby-Boom</title>
       </Head>
-      <div className="background mb-10">
+      <div className="background mb-10 ">
         <Image src={background} alt="test" layout="responsive" sizes="100vw" />
       </div>
 
       <main className="flex flex-col items-center justify-center">
-        <h2 style={{ fontSize: 25, marginBottom: 30 }}>Login</h2>
         <Form
           name="login"
           style={{ width: "100%", maxWidth: 350 }}
@@ -51,24 +73,39 @@ export default function login() {
           <Form.Item name="email" rules={[{ required: true, message: "" }]}>
             <Input size="large" prefix={<MailOutlined />} placeholder="Email" />
           </Form.Item>
+
+          {/* Checkbox */}
+          <div className="chekbox flex justify-end">
+            <Checkbox onChange={onChange}>Enregistrer </Checkbox>
+          </div>
           <Form.Item name="password" rules={[{ required: true, message: "" }]}>
-            <Input
+            {/* Password */}
+            <Input.Password
               size="large"
+              iconRender={(visible) =>
+                visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+              }
               prefix={<LockOutlined />}
               type="password"
               placeholder="Password"
             />
           </Form.Item>
+          <div className="chekbox flex justify-end ">
+
+            <p className="cursor-pointer" values={email} onChange={setEmail} onClick={() => sendPasswordReset() }>
+              Mot de passe oublié ?
+            </p>
+          </div>
 
           <Form.Item>
             <Button
               size="large"
               type="primary"
               htmlType="submit"
-              className="login-form-button"
+              className="login-form-button rounded-3xl"
               block
             >
-              Log In
+              Connexion
             </Button>
           </Form.Item>
         </Form>

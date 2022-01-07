@@ -6,6 +6,7 @@ import {
   sendPasswordResetEmail,
   onAuthStateChanged,
   signInWithPopup,
+  sendPasswordReset,
   sendEmailVerification,
   GoogleAuthProvider,
   signOut,
@@ -96,8 +97,22 @@ export default function AuthContextProvider({ children }) {
       // ...
     });
 
+    function sendPasswordReset() {
+      const email = "sam@example.com";
+      // [START auth_send_password_reset]
+      firebase.auth().sendPasswordResetEmail(email)
+        .then(() => {
+          // Password reset email sent!
+          // ..
+        })
+        .catch((error) => {
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // ..
+        });
   const value = {
     currentUser,
+    sendPasswordReset,
     signInWithGoogle,
     login,
     register,
