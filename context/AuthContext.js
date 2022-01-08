@@ -7,11 +7,10 @@ import {
   onAuthStateChanged,
   signInWithPopup,
   sendPasswordReset,
-  sendEmailVerification,
   GoogleAuthProvider,
   signOut,
   confirmPasswordReset,
-  updateProfile
+  updateProfile,
 } from "firebase/auth";
 
 const AuthContext = createContext({
@@ -22,6 +21,7 @@ const AuthContext = createContext({
   logout: () => Promise,
   forgotPassword: () => Promise,
   resetPassword: () => Promise,
+  sendPasswordReset: () => Promise,
 });
 
 export const useAuth = () => useContext(AuthContext);
@@ -97,19 +97,24 @@ export default function AuthContextProvider({ children }) {
       // ...
     });
 
-    function sendPasswordReset() {
-      const email = "sam@example.com";
-      // [START auth_send_password_reset]
-      firebase.auth().sendPasswordResetEmail(email)
-        .then(() => {
-          // Password reset email sent!
-          // ..
-        })
-        .catch((error) => {
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          // ..
+  function sendPasswordReset() {
+    const email = "kalil90100@gmail.com";
+    // [START auth_send_password_reset]
+    firebase.auth
+      .sendPasswordResetEmail(email)
+      .then(() => {
+        message.success({
+          key: "Password",
+          content:
+            "Veuillez reinitialiser votre mot de passe recue dans votre boite email ! :)",
         });
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // ..
+      });
+  }
   const value = {
     currentUser,
     sendPasswordReset,
@@ -120,7 +125,7 @@ export default function AuthContextProvider({ children }) {
     forgotPassword,
     resetPassword,
     sendEmailVerification,
-    updateProfile
+    updateProfile,
   };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

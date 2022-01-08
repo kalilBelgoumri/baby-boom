@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Form, Input, Button, message } from "antd";
+import { Form, Modal, Checkbox, Input, Button, message } from "antd";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
 import firebase from "../firebase/firebase";
 import Router from "next/router";
@@ -7,25 +7,29 @@ import { useState, useEffect } from "react";
 import background from "../assets/login.jpg";
 import Image from "next/image";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
-import { Checkbox } from "antd";
 
 export default function login() {
-  const [colors, setColors] = useState("");
+  const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [visible, setVisible] = useState(false);
 
+  // Reset Password
   function sendPasswordReset() {
-    const email = "kalil90100@gmail.com";
     // [START auth_send_password_reset]
-    firebase.auth.sendPasswordResetEmail(email)
+    firebase.auth
+      .sendPasswordResetEmail(email)
       .then(() => {
-        message.success({ key: "Password", content: "Veuillez reinitialiser votre mot de passe recue dans votre boite email ! :)" });
+        message.success({
+          key: "Password",
+          content:" Veuillez reinitialiser votre mot de passe recue dans votre boite email ! Merci de verifer votre dossier Spam  :)",
+        });
       })
       .catch((error) => {
         var errorCode = error.code;
         var errorMessage = error.message;
         // ..
-      }) 
-    }
+      });
+  }
 
   useEffect(() => {
     if (firebase.isLoggedIN()) {
@@ -91,11 +95,40 @@ export default function login() {
             />
           </Form.Item>
           <div className="chekbox flex justify-end ">
-
-            <p className="cursor-pointer" values={email} onChange={setEmail} onClick={() => sendPasswordReset() }>
+            {/* <p
+              className="cursor-pointer"
+              values={email}
+              onChange={setEmail}
+              onClick={() => sendPasswordReset()}
+            >
               Mot de passe oublié ?
-            </p>
+            </p> */}
           </div>
+
+          <p type="primary" onClick={() => setVisible(true)}>
+            Mot de passe oublié ?
+          </p>
+          <Modal
+            title="Merci de renseigner votre adresse email pour la reinitialisation de votre mot de passe ! "
+            values={email}
+            centered
+            visible={visible}
+            onChange={setEmail}
+            onOk={(() => setVisible(false), sendPasswordReset)}
+            // onClick={() => sendPasswordReset()}
+            onCancel={() => setVisible(false)}
+            width={1000}
+          >
+            <Form.Item name="email" rules={[{ required: true, message: "" }]}>
+              <Input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                size="large"
+                prefix={<MailOutlined />}
+                placeholder="Email"
+              />
+            </Form.Item>
+          </Modal>
 
           <Form.Item>
             <Button
