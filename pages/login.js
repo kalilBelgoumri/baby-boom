@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Form, Modal, Checkbox, Input, Button, message } from "antd";
+import { Form, Modal, Input, Button, message } from "antd";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
 import firebase from "../firebase/firebase";
 import Router from "next/router";
@@ -7,6 +7,8 @@ import { useState, useEffect } from "react";
 import background from "../assets/login.jpg";
 import Image from "next/image";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
+import { Footer } from "antd/lib/layout/layout";
+import Checkbox from '@mui/material/Checkbox';
 
 export default function login() {
   const [email, setEmail] = useState("");
@@ -14,6 +16,12 @@ export default function login() {
   const [visible, setVisible] = useState(false);
   const [checked, setChecked] = useState(false);
 
+
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+    console.log(`checked = ${event.target.checked}`);
+
+  };
   // Reset Password
   function sendPasswordReset() {
     // [START auth_send_password_reset]
@@ -102,15 +110,22 @@ export default function login() {
 
           {/* Checkbox */}
           <div className="chekbox flex justify-end">
-            <input
+            {/* <input
               type="checkbox"
               name="rememberMe"
               onChange={((e) => setChecked(e.target.checked), onChangeChecked)}
               value={checked}
               checkedOk={checked}
             />
-            Enregistrer
+            Enregistrer */}
+
+            <Checkbox
+              checked={checked}
+              onChange={handleChange}
+              inputProps={{ "aria-label": "controlled" }}
+            />
           </div>
+
           {/* Password */}
           <Form.Item name="password" rules={[{ required: true, message: "" }]}>
             {/* Password */}
@@ -169,10 +184,21 @@ export default function login() {
           </Form.Item>
           <div className="noRegistrer flex justify-center items-center">
             <p>Pas encore enrigistrer ?</p>
-            <p className="text-red-500 font-bold ml-3 cursor-pointer" onClick={() => Router.push("/create-account")}> Cliquer ici </p>
+            <p
+              className="text-red-500 font-bold ml-3 cursor-pointer"
+              onClick={() => Router.push("/create-account")}
+            >
+              {" "}
+              Cliquer ici{" "}
+            </p>
           </div>
         </Form>
       </main>
+
+        <footer>
+          <Footer />
+          <p>Baby-Boom 2021 tous droit reservé</p>
+        </footer>
     </>
   );
 }

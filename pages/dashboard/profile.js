@@ -15,9 +15,9 @@ export default function profile() {
       </Head>
       <Layout>
         <Header activeKey={"2"} />
-        <Layout.Content style={{ padding: "0 50px", marginTop: 64 }}>
-          <div className="site-layout-background mainlayout">
-            <div className="container">
+        
+          <div>
+            <div>
               <Card
                 style={{ width: 300, marginTop: 16 }}
                 actions={[
@@ -73,7 +73,6 @@ export default function profile() {
               </Card>
             </div>
           </div>
-        </Layout.Content>
       </Layout>
     </>
   );
