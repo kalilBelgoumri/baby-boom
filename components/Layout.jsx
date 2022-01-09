@@ -19,8 +19,8 @@ const Layout = ({ children, page }) => {
     user.photoURL;
     user.emailVerified;
     user.uid;
+    console.log(`${user.displayName}`);
   }
-  console.log(user);
   return (
     <div className="flex flex-col h-screen">
       <Head>
@@ -43,10 +43,7 @@ const Layout = ({ children, page }) => {
             )}
             <div className="displayName flex justify-center items-center ">
               {firebase.isLoggedIN() && (
-                <p className="text-md flex">
-                  {" "}
-                  Bonjour {`${user.displayName}`}{" "}
-                </p>
+                <p className="text-md flex">Bonjour {`${user.displayName}${ user.photoURL}`}</p>
               )}
             </div>
             {!firebase.isLoggedIN() && (

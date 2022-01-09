@@ -9,9 +9,10 @@ import Image from "next/image";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 
 export default function login() {
-  const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
+  const [checked, setChecked] = useState(false);
 
   // Reset Password
   function sendPasswordReset() {
@@ -21,7 +22,8 @@ export default function login() {
       .then(() => {
         message.success({
           key: "Password",
-          content:" Veuillez reinitialiser votre mot de passe recue dans votre boite email ! Merci de verifer votre dossier Spam  :)",
+          content:
+            " Veuillez reinitialiser votre mot de passe recue dans votre boite email ! Merci de verifer votre dossier Spam  :)",
         });
       })
       .catch((error) => {
@@ -37,8 +39,8 @@ export default function login() {
     }
   }, []);
 
-  function onChange(e) {
-    console.log(`checked = ${e.target.checked}`);
+  function onChangeChecked(e) {
+    console.log(`checkedOk = ${e.target.checked}`);
   }
 
   // Login
@@ -58,6 +60,20 @@ export default function login() {
     }
   }
 
+  // function handleFormSubmit ()  {
+
+  //   localStorage.setItem('rememberMe',rememberMe);
+  //   localStorage.setItem('email', rememberMe ? email : '');
+  //   localStorage.setItem('passsword', rememberMe ? password : '');
+
+  // };
+
+  useEffect(() => {
+    // storing input name
+    localStorage.setItem("email", JSON.stringify(email));
+    localStorage.setItem("password", JSON.stringify(password));
+  }, [email, password]);
+
   return (
     <>
       <Head>
@@ -75,16 +91,32 @@ export default function login() {
           onFinish={doLogin} // When click the Login Button
         >
           <Form.Item name="email" rules={[{ required: true, message: "" }]}>
-            <Input size="large" prefix={<MailOutlined />} placeholder="Email" />
+            <Input
+              size="large"
+              prefix={<MailOutlined />}
+              placeholder="Email"
+              values={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </Form.Item>
 
           {/* Checkbox */}
           <div className="chekbox flex justify-end">
-            <Checkbox onChange={onChange}>Enregistrer </Checkbox>
+            <input
+              type="checkbox"
+              name="rememberMe"
+              onChange={((e) => setChecked(e.target.checked), onChangeChecked)}
+              value={checked}
+              checkedOk={checked}
+            />
+            Enregistrer
           </div>
+          {/* Password */}
           <Form.Item name="password" rules={[{ required: true, message: "" }]}>
             {/* Password */}
             <Input.Password
+              values={password}
+              onChange={(e) => setPassword(e.target.value)}
               size="large"
               iconRender={(visible) =>
                 visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
@@ -94,20 +126,16 @@ export default function login() {
               placeholder="Password"
             />
           </Form.Item>
+
           <div className="chekbox flex justify-end ">
-            {/* <p
+            <p
+              type="primary"
               className="cursor-pointer"
-              values={email}
-              onChange={setEmail}
-              onClick={() => sendPasswordReset()}
+              onClick={() => setVisible(true)}
             >
               Mot de passe oublié ?
-            </p> */}
+            </p>
           </div>
-
-          <p type="primary" onClick={() => setVisible(true)}>
-            Mot de passe oublié ?
-          </p>
           <Modal
             title="Merci de renseigner votre adresse email pour la reinitialisation de votre mot de passe ! "
             values={email}
@@ -115,7 +143,6 @@ export default function login() {
             visible={visible}
             onChange={setEmail}
             onOk={(() => setVisible(false), sendPasswordReset)}
-            // onClick={() => sendPasswordReset()}
             onCancel={() => setVisible(false)}
             width={1000}
           >
@@ -129,7 +156,6 @@ export default function login() {
               />
             </Form.Item>
           </Modal>
-
           <Form.Item>
             <Button
               size="large"
@@ -141,6 +167,10 @@ export default function login() {
               Connexion
             </Button>
           </Form.Item>
+          <div className="noRegistrer flex justify-center items-center">
+            <p>Pas encore enrigistrer ?</p>
+            <p className="text-red-500 font-bold ml-3 cursor-pointer" onClick={() => Router.push("/create-account")}> Cliquer ici </p>
+          </div>
         </Form>
       </main>
     </>
