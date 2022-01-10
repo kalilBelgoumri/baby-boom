@@ -43,7 +43,7 @@ const Layout = ({ children, page }) => {
             )}
             <div className="displayName flex justify-center items-center ">
               {firebase.isLoggedIN() && (
-                <p className="text-md flex">Bonjour {`${user.displayName}${ user.photoURL}`}</p>
+                <p className="text-md flex">Bonjour {`${user.displayName}`}</p>
               )}
             </div>
             {!firebase.isLoggedIN() && (
