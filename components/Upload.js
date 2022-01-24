@@ -1,67 +1,100 @@
-import { Upload, message } from 'antd';
-import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
+import { useState } from "react";
+import "firebase/auth";
+import "firebase/storage";
+import firebase from "firebase/app";
+import Loader from "../components/loader";
+import { height, width } from "@mui/system";
+import Layout from "antd/lib/layout/layout";
 
-function getBase64(img, callback) {
-  const reader = new FileReader();
-  reader.addEventListener('load', () => callback(reader.result));
-  reader.readAsDataURL(img);
-}
+// Uploads images to Firebase Storage
+export default function ImageUploader() {
+  const [uploading, setUploading] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [downloadURL, setDownloadURL] = useState(null);
 
-function beforeUpload(file) {
-  const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-  if (!isJpgOrPng) {
-    message.error('You can only upload JPG/PNG file!');
-  }
-  const isLt2M = file.size / 1024 / 1024 < 2;
-  if (!isLt2M) {
-    message.error('Image must smaller than 2MB!');
-  }
-  return isJpgOrPng && isLt2M;
-}
+  const storage = firebase.storage();
+  const auth = firebase.auth();
+  const STATE_CHANGED = firebase.storage.TaskEvent.STATE_CHANGED;
+  const user = firebase.auth().currentUser;
 
-class Avatar extends React.Component {
-  state = {
-    loading: false,
+  // Creates a Firebase Upload Task
+  const uploadFile = async (e) => {
+    // Get the file
+    const file = Array.from(e.target.files)[0];
+
+    // Makes reference to the storage bucket location
+    const ref = storage.ref("uploads/" + user.uid + "/avatar.jpg");
+    setUploading(true);
+
+    // avatarStgRef.put(file).then(function (snapshot) {
+    //   snapshot.ref.getDownloadURL().then(function (url) {
+    //     // Now I can use url
+    //     user
+    //       .updateProfile({
+    //         photoURL: url, // <- URL from uploaded photo.
+    //       })
+    //       .then(function () {
+    //         firebase
+    //           .database()
+    //           .ref("Usuarios/" + user.uid)
+    //           .set({
+    //             photoUri: url, // <- URL from uploaded photo.
+    //           });
+    //       });
+    //   });
+    // });
+
+    // Starts the upload
+    const task = ref.put(file);
+
+    // Listen to updates to upload task
+    task.on(STATE_CHANGED, (snapshot) => {
+      const pct = (
+        (snapshot.bytesTransferred / snapshot.totalBytes) *
+        100
+      ).toFixed(0);
+      setProgress(pct);
+    });
+
+    // Get downloadURL AFTER task resolves (Note: this is not a native Promise)
+    task
+      .then((d) => ref.getDownloadURL())
+      .then((url) => {
+        setDownloadURL(url);
+
+        // Now I can use url
+        user.updateProfile({
+          photoURL: url, // <- URL from uploaded photo.
+        })
+        setUploading(false);
+        console.log(url);
+      });
   };
 
-  handleChange = info => {
-    if (info.file.status === 'uploading') {
-      this.setState({ loading: true });
-      return;
-    }
-    if (info.file.status === 'done') {
-      // Get this url from response in real world.
-      getBase64(info.file.originFileObj, imageUrl =>
-        this.setState({
-          imageUrl,
-          loading: false,
-        }),
-      );
-    }
-  };
+  return (
+    <div className="box">
+      <Loader show={uploading} />
+      {uploading && <h3>{progress}%</h3>}
 
-  render() {
-    const { loading, imageUrl } = this.state;
-    const uploadButton = (
-      <div>
-        {loading ? <LoadingOutlined /> : <PlusOutlined />}
-        <div style={{ marginTop: 8 }}>Upload</div>
+      {!uploading && (
+        <>
+          <label className="btn">
+            📸 Upload Img
+            <input
+              type="file"
+              onChange={uploadFile}
+              accept="image/x-png,image/gif,image/jpeg"
+            />
+          </label>
+        </>
+      )}
+      <div className="div flex items-center justify-center flex-col mt-20">
+        Bonjour Sarah
+        {downloadURL && (
+          <img className="rounded-full w-20 h-20 mx-auto" src={downloadURL} />
+        )}
+        <div className="flex mt-10 mb-10"></div>
       </div>
-    );
-    return (
-      <Upload
-        name="avatar"
-        listType="picture-card"
-        className="avatar-uploader"
-        showUploadList={false}
-        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-        beforeUpload={beforeUpload}
-        onChange={this.handleChange}
-      >
-        {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
-      </Upload>
-    );
-  }
+    </div>
+  );
 }
-
-ReactDOM.render(<Avatar />, mountNode);

@@ -1,7 +1,7 @@
 import '../styles/globals.css'
 import "antd/dist/antd.css";
 import { useState, useEffect } from "react";
-import firebase from "../firebase/firebase";
+import firebase from '../firebase/Firebase'
 import { Spin } from "antd";
 
 function MyApp({ Component, pageProps }) {

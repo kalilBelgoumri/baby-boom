@@ -2,7 +2,7 @@ import { Layout, Card, message } from "antd";
 import Header from "../../components/header";
 import Head from "next/head";
 import { DeleteOutlined, KeyOutlined } from "@ant-design/icons";
-import firebase from "../../firebase/firebase";
+import firebase from  "../../firebase/Firebase"
 import Router from "next/router";
 
 export default function profile() {

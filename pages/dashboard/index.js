@@ -1,9 +1,10 @@
 import Head from "next/head";
 import Router from "next/router";
 import React, { useEffect, useState } from "react";
-import firebase from "../../firebase/firebase";
+import firebase from "../../firebase/Firebase";
 import HomeIcon from "@mui/icons-material/Home";
 import LayoutUsers from "../../components/LayoutUsers";
+import Upload from "../../components/Upload";
 
 
 export default function dashboard() {
@@ -22,6 +23,7 @@ export default function dashboard() {
     user.emailVerified;
     user.uid;
     console.log(`${user.displayName}`);
+    console.log(`${user.photoURL}`);
   }
 
   return (
@@ -45,9 +47,14 @@ export default function dashboard() {
               <h1 className="font-bold text-2xl flex ">Baby-Boom</h1>
               <div className="displayName flex ">
               {firebase.isLoggedIN() && (
+                <u>
+
                 <p className="text-md flex">Bonjour {`${user.displayName}`}</p>
+               <img src={user.photoURL} alt="test" />
+                </u>
               )}
             </div>
+            <Upload />
             </div>
           </div>
         </main>

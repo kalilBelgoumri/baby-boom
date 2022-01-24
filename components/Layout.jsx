@@ -4,7 +4,8 @@ import Head from "next/head";
 import { Twirl as Hamburger } from "hamburger-react";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import firebase from "../firebase/firebase";
+import firebase from "../firebase/Firebase";
+import Avatar from "@mui/material/Avatar";
 
 const Layout = ({ children, page }) => {
   const router = useRouter();
@@ -43,7 +44,10 @@ const Layout = ({ children, page }) => {
             )}
             <div className="displayName flex justify-center items-center ">
               {firebase.isLoggedIN() && (
-                <p className="text-md flex">Bonjour {`${user.displayName}`}</p>
+                <ul className="flex justify-center items-center">
+                  <p>{`${user.displayName}`}</p>
+                  <Avatar alt="" src={user.photoURL} />
+                </ul>
               )}
             </div>
             {!firebase.isLoggedIN() && (
@@ -56,14 +60,14 @@ const Layout = ({ children, page }) => {
             )}
             {firebase.isLoggedIN() && (
               <button
-                className="py-2 px-5 bg-red-700 rounded-lg"
+                className=" px-4 cursor-pointer rounded-lg font-bold"
                 onClick={async () => {
                   // Logout
                   await firebase.logout();
                   router.push("/");
                 }}
               >
-                Logout
+                <p className="cursor-pointer"> Deconnexion</p>
               </button>
             )}
           </div>

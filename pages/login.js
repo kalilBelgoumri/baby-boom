@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { Form, Modal, Input, Button, message } from "antd";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
-import firebase from "../firebase/firebase";
+import firebase from "../firebase/Firebase";
 import Router from "next/router";
 import { useState, useEffect } from "react";
 import background from "../assets/login.jpg";

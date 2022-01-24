@@ -8,17 +8,14 @@ import group from "../assets/group.svg";
 import messages from "../assets/messages.png";
 import { useRouter } from "next/router";
 import CardMedia from "../components/CardMedia";
-
-
+import "firebase/firestore";
 
 export default function Home() {
   const router = useRouter();
-  const uniqid = require('uniqid'); 
-  console.log(uniqid())
-
-
-
+  const uniqid = require("uniqid");
+  console.log(uniqid());
   
+
   // Card city
   const city = [
     {
@@ -175,6 +172,9 @@ export default function Home() {
               typoCity="Marseille"
             />
           </div>
+          <button onClick={() => createUser({ name: "Brad Garropy" })}>
+            Create
+          </button>
         </div>
       </Layout>
     </>

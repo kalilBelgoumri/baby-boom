@@ -1,25 +1,44 @@
 import Head from "next/head";
 import { Form, Input, Button, message } from "antd";
 import { MailOutlined, LockOutlined, UserOutlined } from "@ant-design/icons";
-import firebase from "../firebase/firebase";
+import firebase from "../firebase/Firebase";
 import Router from "next/router";
 import { useEffect, useState } from "react";
 
 export default function signup() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState(null);
 
-  if (password !== confirmPassword) {
-    console.log("error");
-  } else {
-    console.log("ok");
-  }
-  useEffect(() => {
-    if (firebase.isLoggedIN()) {
-      Router.push("/dashboard");
-    }
-  });
+  //   const onSubmit = event => {
+  //   setError(null)
+  //   if(password === confirmPassword) {
+  //     console.log("error");
+  //   } else {
+  //     console.log("ok");
+  //   }
+  //   useEffect(() => {
+  //     if (firebase.isLoggedIN()) {
+  //       Router.push("/dashboard");
+  //     }
 
+  //   });
+  // }
+
+  const onSubmit = (event) => {
+    setError(null);
+    if (password === confirmPassword)
+      createUserWithEmailAndPassword(email, password,confirmPassword)
+        .then((authUser) => {
+          console.log("Success. The user is created in firebase");
+          router.push("/logged_in");
+        })
+        .catch((error) => {
+          setError(error.message);
+        });
+    else setError("Password do not match");
+    event.preventDefault();
+  };
   async function doSignup(values) {
     console.log(values); // Expected output {name: "Tuhin", email: "me@thetuhin.com", password: "123456789"}
     message.loading({ key: "signup", content: "Signing up !" }); // Showing logging in message
@@ -44,6 +63,7 @@ export default function signup() {
       <main className="fullscreenflexmiddle">
         <h2 style={{ fontSize: 25, marginBottom: 30 }}>Create Account</h2>
         <Form
+          onSubmit={onSubmit}
           name="signup"
           style={{ width: "100%", maxWidth: 350 }}
           initialValues={{ remember: true }}
@@ -58,6 +78,7 @@ export default function signup() {
           <Form.Item name="password" rules={[{ required: true, message: "" }]}>
             <Input
               size="large"
+              values={password}
               prefix={<LockOutlined />}
               type="password"
               placeholder="Password"
@@ -70,7 +91,7 @@ export default function signup() {
             rules={[{ required: true, message: "" }]}
           >
             <Input
-              value={confirmPassword}
+              values={confirmPassword}
               size="large"
               prefix={<LockOutlined />}
               type="password"

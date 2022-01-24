@@ -10,7 +10,7 @@ const config = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGNG_APP_ID,
 };
 
-class Firebase {
+class getFirebase {
   constructor() {
     if (!fire.apps.length) {
       fire.initializeApp(config);
@@ -26,11 +26,12 @@ class Firebase {
     return await this.auth.signOut();
   }
 
-  async register({ name, email, password }) {
+  async register({ name,photoURL, email, password }) {
     await this.auth.createUserWithEmailAndPassword(email, password);
     await this.auth.currentUser.sendEmailVerification();
     return this.auth.currentUser.updateProfile({
       displayName: name,
+      displayphotoURL: photoURL,
     });
   }
 
@@ -71,6 +72,7 @@ class Firebase {
       };
     }
   }
+  
   async sendVerification() {
     try {
       if (this.auth.currentUser) {
@@ -86,4 +88,4 @@ class Firebase {
 }
 
 
-export default new Firebase();
+export default new getFirebase();

@@ -1,6 +1,6 @@
 import Router from "next/router";
 import { useEffect,useState } from "react";
-import firebase from "../firebase/firebase";
+import firebase from "../firebase/Firebase";
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
