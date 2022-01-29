@@ -3,7 +3,9 @@ import { Form, Input, Button, message } from "antd";
 import { MailOutlined, LockOutlined, UserOutlined } from "@ant-design/icons";
 import firebase from "../firebase/Firebase";
 import Router from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import background from "../assets/login.jpg";
+import Image from "next/image";
 
 export default function signup() {
   const [password, setPassword] = useState("");
@@ -28,7 +30,7 @@ export default function signup() {
   const onSubmit = (event) => {
     setError(null);
     if (password === confirmPassword)
-      createUserWithEmailAndPassword(email, password,confirmPassword)
+      createUserWithEmailAndPassword(email, password, confirmPassword)
         .then((authUser) => {
           console.log("Success. The user is created in firebase");
           router.push("/logged_in");
@@ -58,54 +60,72 @@ export default function signup() {
   return (
     <>
       <Head>
-        <title>Create Account | Firenext</title>
+        <title>Create-Account | Baby-Boom</title>
       </Head>
-      <main className="fullscreenflexmiddle">
-        <h2 style={{ fontSize: 25, marginBottom: 30 }}>Create Account</h2>
-        <Form
-          onSubmit={onSubmit}
-          name="signup"
-          style={{ width: "100%", maxWidth: 350 }}
-          initialValues={{ remember: true }}
-          onFinish={doSignup} // When click the Signup Button
-        >
-          <Form.Item name="name" rules={[{ required: true, message: "" }]}>
-            <Input size="large" prefix={<UserOutlined />} placeholder="Name" />
-          </Form.Item>
-          <Form.Item name="email" rules={[{ required: true, message: "" }]}>
-            <Input size="large" prefix={<MailOutlined />} placeholder="Email" />
-          </Form.Item>
-          <Form.Item name="password" rules={[{ required: true, message: "" }]}>
-            <Input
-              size="large"
-              values={password}
-              prefix={<LockOutlined />}
-              type="password"
-              placeholder="Password"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </Form.Item>
-          <Form.Item
-            value={password}
-            name="confirmPassword"
-            rules={[{ required: true, message: "" }]}
+        <div className=" mb-10  ">
+          <Image
+            className="object-center object-cover"
+            src={background}
+            alt="test"
+            layout="responsive"
+            height="30vw"
+            width="30vw"
+          />
+        </div>
+        <main className="fullscreenflexmiddle flex flex-col justify-center items-center">
+          <h2 style={{ fontSize: 25, marginBottom: 30 }}>Crée votre compte</h2>
+          <Form
+            onSubmit={onSubmit}
+            name="signup"
+            style={{ width: "100%", maxWidth: 350 }}
+            initialValues={{ remember: true }}
+            onFinish={doSignup} // When click the Signup Button
           >
-            <Input
-              values={confirmPassword}
-              size="large"
-              prefix={<LockOutlined />}
-              type="password"
-              placeholder="Confirm Password"
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-          </Form.Item>
-          <Form.Item>
-            <Button size="large" type="primary" htmlType="submit" block>
-              Signup
-            </Button>
-          </Form.Item>
-        </Form>
-      </main>
+            <Form.Item name="name" rules={[{ required: true, message: "" }]}>
+              <Input size="large" prefix={<UserOutlined />} placeholder="Nom" />
+            </Form.Item>
+            <Form.Item name="email" rules={[{ required: true, message: "" }]}>
+              <Input
+                size="large"
+                prefix={<MailOutlined />}
+                placeholder="Email"
+              />
+            </Form.Item>
+            <Form.Item
+              name="password"
+              rules={[{ required: true, message: "" }]}
+            >
+              <Input
+                size="large"
+                values={password}
+                prefix={<LockOutlined />}
+                type="password"
+                placeholder="Password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </Form.Item>
+            <Form.Item
+              value={password}
+              name="confirmPassword"
+              rules={[{ required: true, message: "" }]}
+            >
+              <Input
+                values={confirmPassword}
+                size="large"
+                prefix={<LockOutlined />}
+                type="password"
+                placeholder="Confirm Password"
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+            </Form.Item>
+            <Form.Item>
+              <Button size="large" type="primary" htmlType="submit" block>
+                S'enregistrer
+              </Button>
+            </Form.Item>
+          </Form>
+        </main>
+
     </>
   );
 }

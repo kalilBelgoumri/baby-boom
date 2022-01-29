@@ -66,7 +66,7 @@ export default function ImageUploader() {
         user.updateProfile({
           photoURL: url, // <- URL from uploaded photo.
         })
-        setUploading(false);
+               setUploading(false);
         console.log(url);
       });
   };
@@ -78,8 +78,8 @@ export default function ImageUploader() {
 
       {!uploading && (
         <>
-          <label className="btn">
-            📸 Upload Img
+          <label className="btn flex flex-col">
+            📸
             <input
               type="file"
               onChange={uploadFile}
@@ -89,10 +89,9 @@ export default function ImageUploader() {
         </>
       )}
       <div className="div flex items-center justify-center flex-col mt-20">
-        Bonjour Sarah
-        {downloadURL && (
+        {/* {downloadURL && (
           <img className="rounded-full w-20 h-20 mx-auto" src={downloadURL} />
-        )}
+        )} */}
         <div className="flex mt-10 mb-10"></div>
       </div>
     </div>

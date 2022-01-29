@@ -1,11 +1,12 @@
 import Footer from "./Footer";
 import Head from "next/head";
-// import background from "../assets/background.jpg";
 import { Twirl as Hamburger } from "hamburger-react";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import firebase from "../firebase/Firebase";
 import Avatar from "@mui/material/Avatar";
+import IconButton from "@mui/material/IconButton";
+import Fingerprint from "@mui/icons-material/Fingerprint";
 
 const Layout = ({ children, page }) => {
   const router = useRouter();
@@ -28,47 +29,51 @@ const Layout = ({ children, page }) => {
         <title>{page}</title>
       </Head>
       <header>
-        <div className="flex items-center shadow-xl bg-stone-100">
+        <div className="flex">
           <div className="container flex items-center">
             {/* Hamburger Menu */}
             <Hamburger toggled={isOpen} toggle={setOpen} />
           </div>
-          <div className="button flex justify-end">
+          <div className="flex">
             {!firebase.isLoggedIN() && (
-              <button
-                onClick={() => router.push("/login")}
-                className="text-black text-xs py-2 px-4 bg-[#B538A8] rounded-lg mr-3"
-              >
-                Connexion
-              </button>
+              <div className="flex justify-end">
+                <IconButton aria-label="fingerprint" color="secondary">
+                  <Fingerprint onClick={() => router.push("/login")} />
+                  <div className="text-black text-xs font-bold">Connexion</div>
+                </IconButton>
+              </div>
             )}
-            <div className="displayName flex justify-center items-center ">
-              {firebase.isLoggedIN() && (
-                <ul className="flex justify-center items-center">
-                  <p>{`${user.displayName}`}</p>
+
+            {firebase.isLoggedIN() && (
+              <ul className="flex items-center justify-center  mr-5">
+                <p className="text-sm text-center flex mr-5  ">{`${user.displayName}`}</p>
+                <div className="flex">
                   <Avatar alt="" src={user.photoURL} />
-                </ul>
-              )}
-            </div>
+                </div>
+              </ul>
+            )}
             {!firebase.isLoggedIN() && (
-              <button
-                onClick={() => router.push("/register")}
-                className="text-black text-xs py-2 px-4 rounded-lg mr-2 shadow-lg shadow-blue-500/40 hover:shadow-indigo-500/40 "
-              >
-                S'enregistrer
-              </button>
+              <div className="flex items-center justify-center">
+                <IconButton aria-label="fingerprint" color="primary">
+                  <Fingerprint onClick={() => router.push("/create-account")} />
+                  <div className="text-black text-xs font-bold">
+                    S'enregister
+                  </div>
+                </IconButton>
+              </div>
             )}
             {firebase.isLoggedIN() && (
-              <button
-                className=" px-4 cursor-pointer rounded-lg font-bold"
-                onClick={async () => {
-                  // Logout
-                  await firebase.logout();
-                  router.push("/");
-                }}
-              >
-                <p className="cursor-pointer"> Deconnexion</p>
-              </button>
+              <div className="flex justify-center">
+                <IconButton aria-label="fingerprint" color="secondary">
+                  <Fingerprint
+                    onClick={async () => {
+                      await firebase.logout();
+                      router.push("/");
+                    }}
+                  />
+                </IconButton>
+                <p className="text-black text-xs font-bold">Deconnexion</p>
+              </div>
             )}
           </div>
         </div>

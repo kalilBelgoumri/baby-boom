@@ -8,7 +8,7 @@ import background from "../assets/login.jpg";
 import Image from "next/image";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import { Footer } from "antd/lib/layout/layout";
-import Checkbox from '@mui/material/Checkbox';
+import Checkbox from "@mui/material/Checkbox";
 
 export default function login() {
   const [email, setEmail] = useState("");
@@ -16,11 +16,9 @@ export default function login() {
   const [visible, setVisible] = useState(false);
   const [checked, setChecked] = useState(false);
 
-
   const handleChange = (event) => {
     setChecked(event.target.checked);
     console.log(`checked = ${event.target.checked}`);
-
   };
   // Reset Password
   function sendPasswordReset() {
@@ -84,15 +82,22 @@ export default function login() {
 
   return (
     <>
+      .
+      <Image
+        src={background}
+        objectFit="cover"
+        objectPosition="center"
+        layout="fill"
+        id="background"
+        height={100}
+        width={100}
+      />
       <Head>
         <title>Login | Baby-Boom</title>
       </Head>
-      <div className="background mb-10 ">
-        <Image src={background} alt="test" layout="responsive" sizes="100vw" />
-      </div>
-
-      <main className="flex flex-col items-center justify-center">
+      <main className="flex flex-col items-center justify-center mt-20 overflow-auto ">
         <Form
+          className="z-20"
           name="login"
           style={{ width: "100%", maxWidth: 350 }}
           initialValues={{ remember: true }}
@@ -145,7 +150,7 @@ export default function login() {
           <div className="chekbox flex justify-end ">
             <p
               type="primary"
-              className="cursor-pointer"
+              className="cursor-pointer text-white"
               onClick={() => setVisible(true)}
             >
               Mot de passe oublié ?
@@ -182,23 +187,23 @@ export default function login() {
               Connexion
             </Button>
           </Form.Item>
-          <div className="noRegistrer flex justify-center items-center">
-            <p>Pas encore enrigistrer ?</p>
-            <p
-              className="text-red-500 font-bold ml-3 cursor-pointer"
-              onClick={() => Router.push("/create-account")}
-            >
-              {" "}
-              Cliquer ici{" "}
+          <div className="noRegistrer flex justify-center flex-row">
+            <p>
+              Pas encore enrigistrer ?{" "}
+              <p
+                className="text-red-500 text-center font-bold ml-3 cursor-pointer"
+                onClick={() => Router.push("/create-account")}
+              >
+                Cliquer ici
+              </p>
             </p>
           </div>
         </Form>
       </main>
-
-        <footer>
-          <Footer />
-          <p>Baby-Boom 2021 tous droit reservé</p>
-        </footer>
+      {/* <footer className="absolute">
+        <Footer />
+        <p>Baby-Boom 2021 tous droit reservé</p>
+      </footer> */}
     </>
   );
 }
