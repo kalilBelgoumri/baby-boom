@@ -4,7 +4,7 @@ import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import { useState } from "react";
 
-export default function Search() {
+export default function Search({ className }) {
   const [search, setSearch] = useState("");
   return (
     <Paper
@@ -15,16 +15,28 @@ export default function Search() {
         alignItems: "center",
         justifyCenter: "center",
         borderRadius: 8,
+        borderColor: "#B538A8",
+        border: 2,
       }}
     >
       <IconButton sx={{ p: "10px" }} aria-label="menu" />
       <InputBase
-        sx={{ flex: 1, justifyItems: "center", textAlign: "center",border:'red' }}
-        placeholder="Chercher une Baby sitter"
+        className={className}
+        sx={{
+          display: "flex",
+          flex: 1,
+          alignContent: "center",
+          justifyItems: "center",
+          textAlign: "center",
+          border: "#B538A8",
+          fontSize: 20,
+          color: "black",
+        }}
+        placeholder="Chercher une Baby sitter ..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         inputProps={{ "aria-label": "search google maps" }}
-        />
+      />
       <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
         <SearchIcon />
       </IconButton>

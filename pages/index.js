@@ -70,8 +70,8 @@ export default function Home() {
       <Layout page="Home flex">
         <header>
           <div className="flex justify-center">
-            <div className="absolute z-50 mt-10 w-[80%] md:w-[70%]">
-              <Search />
+            <div className="absolute z-50 mt-10 w-[80%] md:w-[70%] ">
+              <Search className="border-2 border-emerald-600 border-double" />
             </div>
             <Image className="z-10" src={background} alt="test"></Image>
           </div>
