@@ -30,7 +30,7 @@ const Layout = ({ children, page }) => {
       </Head>
       <header>
         <div className="flex">
-          <div className="container flex items-center">
+          <div className="container flex items-center cursor-pointer">
             {/* Hamburger Menu */}
             <Hamburger toggled={isOpen} toggle={setOpen} />
           </div>
@@ -43,17 +43,16 @@ const Layout = ({ children, page }) => {
                 </IconButton>
               </div>
             )}
-
             {firebase.isLoggedIN() && (
-              <ul className="flex items-center justify-center  mr-5">
-                <p className="text-sm text-center flex mr-5  ">{`${user.displayName}`}</p>
-                <div className="flex">
-                  <Avatar alt="" src={user.photoURL} />
-                </div>
-              </ul>
+              <div className="flex items-center mr-5">
+                <p className="text-sm text-center mr-5  ">
+                  {`${user.displayName}`}
+                </p>
+                <Avatar src={user.photoURL} />
+              </div>
             )}
             {!firebase.isLoggedIN() && (
-              <div className="flex items-center justify-center">
+              <div className="flex items-center">
                 <IconButton aria-label="fingerprint" color="primary">
                   <Fingerprint onClick={() => router.push("/create-account")} />
                   <div className="text-black text-xs font-bold">
@@ -63,7 +62,7 @@ const Layout = ({ children, page }) => {
               </div>
             )}
             {firebase.isLoggedIN() && (
-              <div className="flex justify-center">
+              <div className="flex items-center">
                 <IconButton aria-label="fingerprint" color="secondary">
                   <Fingerprint
                     onClick={async () => {

@@ -15,8 +15,6 @@ export default function Search({ className }) {
         alignItems: "center",
         justifyCenter: "center",
         borderRadius: 8,
-        borderColor: "#B538A8",
-        border: 2,
       }}
     >
       <IconButton sx={{ p: "10px" }} aria-label="menu" />

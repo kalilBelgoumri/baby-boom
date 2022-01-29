@@ -73,7 +73,7 @@ export default function Home() {
             <div className="absolute z-50 mt-10 w-[80%] md:w-[70%] ">
               <Search className="border-2 border-emerald-600 border-double" />
             </div>
-            <Image className="z-10" src={background} alt="test"></Image>
+            <Image className="z-10" src={background} alt="test" />
           </div>
         </header>
         <main>
