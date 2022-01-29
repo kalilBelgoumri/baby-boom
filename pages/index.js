@@ -10,6 +10,7 @@ import Image from "next/image";
 import background from "../public/assets/background.jpg";
 
 import "firebase/firestore";
+import SearchTemp from "../components/SearchTemps.";
 
 export default function Home() {
   const router = useRouter();
@@ -72,6 +73,7 @@ export default function Home() {
           <div className="flex justify-center">
             <div className="absolute z-50 mt-10 w-[80%] md:w-[70%] ">
               <Search className="border-2 border-emerald-600 border-double" />
+              <SearchTemp />
             </div>
             <Image className="z-10" src={background} alt="test" />
           </div>

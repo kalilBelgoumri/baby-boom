@@ -3,6 +3,8 @@ import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import { useState } from "react";
+import Fuse from "fuse.js";
+import users from "/users.json";
 
 export default function Search({ className }) {
   const [search, setSearch] = useState("");
