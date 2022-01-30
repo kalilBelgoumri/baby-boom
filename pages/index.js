@@ -82,7 +82,7 @@ export default function Home() {
         <header>
           <div className="flex justify-center">
             <div className="absolute z-50 mt-10 w-[80%] md:w-[70%] ">
-              <Search ref={inputSearchRef} />
+              <Search inputRef={inputSearchRef} />
               {/* <input type="text" ref={inputSearchRef} /> */}
               <div className="flex items-center justify-center mt-10">
                 <button

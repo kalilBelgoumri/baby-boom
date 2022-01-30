@@ -4,7 +4,7 @@ import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import { useState } from "react";
 
-export default function Search({ className, onClick, ref }) {
+export default function Search({ className, onClick, inputRef }) {
   const [search, setSearch] = useState("");
 
   return (
@@ -20,6 +20,7 @@ export default function Search({ className, onClick, ref }) {
     >
       <IconButton sx={{ p: "10px" }} aria-label="menu" />
       <InputBase
+        inputRef={inputRef}
         className={className}
         onClick={onClick}
         sx={{
@@ -35,7 +36,7 @@ export default function Search({ className, onClick, ref }) {
         inputProps={{ "aria-label": "search google maps" }}
       />
       <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
-        <SearchIcon ref={ref} />
+        <SearchIcon />
       </IconButton>
     </Paper>
   );
