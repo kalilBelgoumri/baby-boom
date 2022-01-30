@@ -8,14 +8,24 @@ import { useRouter } from "next/router";
 import CardMedia from "../components/CardMedia";
 import Image from "next/image";
 import background from "../public/assets/background.jpg";
+import SearchIcon from "@mui/icons-material/Search";
+import { useRef } from "react";
 
 import "firebase/firestore";
-import SearchTemp from "../components/SearchTemps.";
 
 export default function Home() {
   const router = useRouter();
   const uniqid = require("uniqid");
   console.log(uniqid());
+
+  const inputSearchRef = useRef(null);
+
+  const searchs = (e) => {
+    e.preventDefault();
+    const term = inputSearchRef.current.value;
+    if (!term) return;
+    router.push(`/search?term=${term}`);
+  };
 
   // Card city
   const city = [
@@ -72,8 +82,16 @@ export default function Home() {
         <header>
           <div className="flex justify-center">
             <div className="absolute z-50 mt-10 w-[80%] md:w-[70%] ">
-              <Search className="border-2 border-emerald-600 border-double" />
-              <SearchTemp />
+              <Search ref={inputSearchRef} />
+              {/* <input type="text" ref={inputSearchRef} /> */}
+              <div className="flex items-center justify-center mt-10">
+                <button
+                  className="btn border border-orange-700 rounded-full w-5/12 py-8 bg-emerald-400 font-bold text-3xl text-slate-100 cursor-pointer px-5"
+                  onClick={searchs}
+                >
+                  J'ai de la chance
+                </button>
+              </div>
             </div>
             <Image className="z-10" src={background} alt="test" />
           </div>
@@ -130,7 +148,7 @@ export default function Home() {
           </p>
 
           {/* Baby-sitters */}
-          <div className="flex gap-5 snap-x overflow-x-auto px-4 mb-10">
+          <div className="flex gap-5 md:snap-x overflow-x-auto px-4 mb-10">
             <div className="snap-start relative flex gap-5">
               <CardMedia
                 image="https://i.ibb.co/TWnKkmL/11098467.jpg"
@@ -177,9 +195,9 @@ export default function Home() {
                 typoCity="Marseille"
               />
             </div>
-            <button onClick={() => createUser({ name: "Brad Garropy" })}>
+            {/* <button onClick={() => createUser({ name: "Brad Garropy" })}>
               Create
-            </button>
+            </button> */}
           </div>
         </main>
       </Layout>

@@ -29,14 +29,14 @@ const Layout = ({ children, page }) => {
         <title>{page}</title>
       </Head>
       <header>
-        <div className="flex">
+        <div className="flex shadow-2xl justify-between ">
           <div className="container flex items-center cursor-pointer">
             {/* Hamburger Menu */}
             <Hamburger toggled={isOpen} toggle={setOpen} />
           </div>
           <div className="flex">
             {!firebase.isLoggedIN() && (
-              <div className="flex justify-end">
+              <div className="flex">
                 <IconButton aria-label="fingerprint" color="secondary">
                   <Fingerprint onClick={() => router.push("/login")} />
                   <div className="text-black text-xs font-bold">Connexion</div>
@@ -45,9 +45,9 @@ const Layout = ({ children, page }) => {
             )}
             {firebase.isLoggedIN() && (
               <div className="flex items-center mr-5">
-                <p className="text-sm text-center mr-5  ">
+                {/* <p className="text-sm text-center mr-5  ">
                   {`${user.displayName}`}
-                </p>
+                </p> */}
                 <Avatar src={user.photoURL} />
               </div>
             )}
@@ -62,7 +62,7 @@ const Layout = ({ children, page }) => {
               </div>
             )}
             {firebase.isLoggedIN() && (
-              <div className="flex items-center">
+              <div className="flex items-center mr-3">
                 <IconButton aria-label="fingerprint" color="secondary">
                   <Fingerprint
                     onClick={async () => {

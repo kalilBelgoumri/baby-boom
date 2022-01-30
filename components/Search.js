@@ -3,11 +3,10 @@ import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import { useState } from "react";
-import Fuse from "fuse.js";
-import users from "/users.json";
 
-export default function Search({ className }) {
+export default function Search({ className, onClick, ref }) {
   const [search, setSearch] = useState("");
+
   return (
     <Paper
       component="form"
@@ -22,14 +21,12 @@ export default function Search({ className }) {
       <IconButton sx={{ p: "10px" }} aria-label="menu" />
       <InputBase
         className={className}
+        onClick={onClick}
         sx={{
           display: "flex",
           flex: 1,
-          alignContent: "center",
-          justifyItems: "center",
           textAlign: "center",
-          border: "#B538A8",
-          fontSize: 20,
+          fontSize: 13,
           color: "black",
         }}
         placeholder="Chercher une Baby sitter ..."
@@ -38,7 +35,7 @@ export default function Search({ className }) {
         inputProps={{ "aria-label": "search google maps" }}
       />
       <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
-        <SearchIcon />
+        <SearchIcon ref={ref} />
       </IconButton>
     </Paper>
   );
