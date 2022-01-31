@@ -63,13 +63,15 @@ const Layout = ({ children, page }) => {
             )}
             {firebase.isLoggedIN() && (
               <div className="flex items-center mr-3">
-                <IconButton aria-label="fingerprint" color="secondary">
-                  <Fingerprint
-                    onClick={async () => {
-                      await firebase.logout();
-                      router.push("/");
-                    }}
-                  />
+                <IconButton
+                  onClick={async () => {
+                    await firebase.logout();
+                    router.push("/");
+                  }}
+                  aria-label="fingerprint"
+                  color="secondary"
+                >
+                  <Fingerprint />
                 </IconButton>
                 <p className="text-black text-xs font-bold">Deconnexion</p>
               </div>

@@ -8,12 +8,11 @@ import { useRouter } from "next/router";
 import CardMedia from "../components/CardMedia";
 import Image from "next/image";
 import background from "../public/assets/background.jpg";
-import SearchIcon from "@mui/icons-material/Search";
 import { useRef } from "react";
 
 import "firebase/firestore";
 
-export default function Home() {
+export default function Home({ results }) {
   const router = useRouter();
   const uniqid = require("uniqid");
   console.log(uniqid());
@@ -24,7 +23,7 @@ export default function Home() {
     e.preventDefault();
     const term = inputSearchRef.current.value;
     if (!term) return;
-    router.push(`/search?term=${term}`);
+    router.push(`/listBaby/?term=${term}`);
   };
 
   // Card city
@@ -82,16 +81,7 @@ export default function Home() {
         <header>
           <div className="flex justify-center">
             <div className="absolute z-50 mt-10 w-[80%] md:w-[70%] ">
-              <Search inputRef={inputSearchRef} />
-              {/* <input type="text" ref={inputSearchRef} /> */}
-              <div className="flex items-center justify-center mt-10">
-                <button
-                  className="btn border border-orange-700 rounded-full w-5/12 py-8 bg-emerald-400 font-bold text-3xl text-slate-100 cursor-pointer px-5"
-                  onClick={searchs}
-                >
-                  J'ai de la chance
-                </button>
-              </div>
+              <Search inputRef={inputSearchRef} onClick={searchs} />
             </div>
             <Image className="z-10" src={background} alt="test" />
           </div>
@@ -203,4 +193,17 @@ export default function Home() {
       </Layout>
     </>
   );
+}
+
+export async function getServerSideProps(context) {
+  const useDummyData = false;
+  const data = await fetch(`http://localhost:3002/album`).then((response) =>
+    response.json()
+  );
+  console.log(data);
+  return {
+    props: {
+      results: data,
+    },
+  };
 }

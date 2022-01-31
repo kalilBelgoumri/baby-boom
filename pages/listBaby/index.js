@@ -1,54 +1,33 @@
-export default function Baby () {
+import Layout from "../../components/Layout";
+import Head from "next/head";
 
-const [movies, setMovies] = useState([]);
-  async function saveMovie(e) {
-    e.preventDefault();
-    setMovies([...movies, formData]);
-    const response = await fetch(
-      `https://gateway.marvel.com/v1/public/characters?ts=1&apikey=${PUBLIC_KEY}&hash=${HASH}`,
-      {
-        method: "POST",
-        body: JSON.stringify(formData),
-      }
-    );
-console.log(data)
-    return await response.json();
-  }
+export default function Baby() {
   return (
-    <div>
-      <Layout page="Home">
+    <>
+      <Layout page="Search result">
         <Head>
-          <title>Movie List Marvel</title>
+          <title>List Baby</title>
         </Head>
-        <div>
-          <ul>
-            {data && data.map((items) => {
-                return <li key="items.id">{items.data}</li>;
-              })}
-          </ul>
-        </div>
+        <h1 className="text-center mt-5">List Baby Search</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius atque,
+          ratione voluptatibus reiciendis obcaecati beatae iusto ex explicabo
+          quos ipsum vel sapiente labore corrupti assumenda, tempore fuga
+          repellat? Molestiae, reprehenderit.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius atque,
+          ratione voluptatibus reiciendis obcaecati beatae iusto ex explicabo
+          quos ipsum vel sapiente labore corrupti assumenda, tempore fuga
+          repellat? Molestiae, reprehenderit.
+        </p>{" "}
+        <p>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius atque,
+          ratione voluptatibus reiciendis obcaecati beatae iusto ex explicabo
+          quos ipsum vel sapiente labore corrupti assumenda, tempore fuga
+          repellat? Molestiae, reprehenderit.
+        </p>
       </Layout>
-    </div>
+    </>
   );
-}
-
-export async function getServerSideProps() {
-
-  try {
-    const res = await fetch(
-      `https://gateway.marvel.com/v1/public/characters?ts=1&apikey=${PUBLIC_KEY}&hash=${HASH}`
-    );
-    const result = await res.json();
-    console.log(result.data);
-    return {
-      props: { res: result },
-    };
-  } catch (err) {
-    console.error(err);
-  }
-  return {
-    props: {
-      data: movies,
-    },
-  };
 }

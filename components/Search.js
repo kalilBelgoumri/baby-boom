@@ -36,7 +36,7 @@ export default function Search({ className, onClick, inputRef }) {
         inputProps={{ "aria-label": "search google maps" }}
       />
       <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
-        <SearchIcon />
+        <SearchIcon onClick={onClick} />
       </IconButton>
     </Paper>
   );
