@@ -9,6 +9,7 @@ import CardMedia from "../components/CardMedia";
 import Image from "next/image";
 import background from "../public/assets/background.jpg";
 import { useRef } from "react";
+import ServiceResult from "../components/ServiceResult";
 
 export default function Home({ results }) {
   const router = useRouter();
@@ -181,29 +182,20 @@ export default function Home({ results }) {
             </div>
           </div>
           <div className="flex snap-x overflow-x-auto mb-10">
-            <div className="snap-start relative flex gap-3 object-cover object-bottom px-5">
-              {/* <CardMedia
-                image="assets/christelle.jpg"
-                typo="Francoise 42 ans"
-                typoCity="Lyon"
-              />
-              <CardMedia
-                image="assets/victoria.jpg"
-                typo="Sandra 28 ans"
-                typoCity="Paris"
-              />
-              <CardMedia
-                image="assets/christelle.jpg"
-                typo="Christelle 33 ans"
-                typoCity="Marseille"
-              />
-              <CardMedia
-                image="assets/victoria.jpg"
-                typo="Christelle 33 ans"
-                typoCity="Marseille"
-              /> */}
-            </div>
+            <div className="snap-start relative flex gap-3 object-cover object-bottom px-5"></div>
           </div>
+
+          {/* <div className="px-10 w-full md:w-full lg:w-full flex items-center justify-center shadow-lg">
+            <div className="bg-blue-400 py-10 pr:3 flex items-center rounded mb-20 overflow-hidden shadow-xl border-2 border-red-800">
+              <Image
+                className="rounded-full"
+                src="/assets/christelle.jpg"
+                width={100}
+                height={100}
+              />
+              <h1>fdgfdgdfdg</h1>
+            </div>
+          </div> */}
         </main>
       </Layout>
     </>

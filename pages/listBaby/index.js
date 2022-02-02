@@ -2,7 +2,7 @@ import Layout from "../../components/Layout";
 import Head from "next/head";
 import CardMedia from "../../components/CardMedia";
 import Router from "next/router";
-import UsersResults from "../../components/UsersResults";
+import ServiceResult from "../../components/ServiceResult";
 
 export default function Baby({ results }) {
   return (
@@ -17,22 +17,20 @@ export default function Baby({ results }) {
             console.log(result);
             return (
               <>
-                <li className="text-center" key={result.id}>
-                  <UsersResults
-                    className="w-screen px-10 bg-red-800"
-                    image={result.picture.large}
-                    typo={result.name.last}
-                    typo={result.name.first}
-                    typoCity={result.location.city}
-                  />
-                  {/* <CardMedia
-                      className="w-full"
-                      image={result.picture.large}
-                      typo={result.name.last}
-                      typo={result.name.first}
-                      typoCity={result.location.city}
-                    /> */}
-                </li>
+                <div className="w-screen px-10">
+                  <li className="text-center" key={result.id}>
+                    <ServiceResult
+                      activity="Plomberie"
+                      src={result.picture.large}
+                      note="4.1"
+                      nb="18"
+                      name={result.name.first}
+                      city={result.location.city}
+                      description="Passionné de fuite d'eau depuis mon enfance j'en ai fait mon métier"
+                      price={"45"}
+                    />
+                  </li>
+                </div>
               </>
             );
           })}
@@ -45,7 +43,7 @@ export default function Baby({ results }) {
 export async function getServerSideProps(context) {
   const useDummyData = false;
   const data = await fetch(
-    `https://randomuser.me/api/?gender=female&results=10&nat=fr`
+    `https://randomuser.me/api/?gender=female&results=20&nat=fr`
   ).then((response) => response.json());
   console.log(data);
   return {
