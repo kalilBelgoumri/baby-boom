@@ -10,8 +10,6 @@ import Image from "next/image";
 import background from "../public/assets/background.jpg";
 import { useRef } from "react";
 
-import "firebase/firestore";
-
 export default function Home({ results }) {
   const router = useRouter();
   const uniqid = require("uniqid");
@@ -140,7 +138,27 @@ export default function Home({ results }) {
           {/* Baby-sitters */}
           <div className="flex gap-5 md:snap-x overflow-x-auto px-4 mb-10">
             <div className="snap-start relative flex gap-5">
-              <CardMedia
+              <ul className="text-center w-full flex items-center justify-center gap-5">
+                {results.results.map((result) => {
+                  console.log(result);
+                  return (
+                    <>
+                      <li className="text-center" key={result.id}>
+                        <div className="flex w-full items-center justify-center">
+                          <CardMedia
+                            className="w-full"
+                            image={result.picture.large}
+                            typo={result.name.last}
+                            typo={result.name.first}
+                            typoCity={result.location.city}
+                          />
+                        </div>
+                      </li>
+                    </>
+                  );
+                })}
+              </ul>
+              {/* <CardMedia
                 image="https://i.ibb.co/TWnKkmL/11098467.jpg"
                 typo="Francoise 42 ans"
                 typoCity="Lyon"
@@ -159,12 +177,12 @@ export default function Home({ results }) {
                 image="https://i.ibb.co/TWnKkmL/11098467.jpg"
                 typo="Christelle 33 ans"
                 typoCity="Marseille"
-              />
+              /> */}
             </div>
           </div>
           <div className="flex snap-x overflow-x-auto mb-10">
             <div className="snap-start relative flex gap-3 object-cover object-bottom px-5">
-              <CardMedia
+              {/* <CardMedia
                 image="assets/christelle.jpg"
                 typo="Francoise 42 ans"
                 typoCity="Lyon"
@@ -183,11 +201,8 @@ export default function Home({ results }) {
                 image="assets/victoria.jpg"
                 typo="Christelle 33 ans"
                 typoCity="Marseille"
-              />
+              /> */}
             </div>
-            {/* <button onClick={() => createUser({ name: "Brad Garropy" })}>
-              Create
-            </button> */}
           </div>
         </main>
       </Layout>
@@ -197,9 +212,9 @@ export default function Home({ results }) {
 
 export async function getServerSideProps(context) {
   const useDummyData = false;
-  const data = await fetch(`http://localhost:3002/album`).then((response) =>
-    response.json()
-  );
+  const data = await fetch(
+    `https://randomuser.me/api/?gender=female&results=10&nat=fr`
+  ).then((response) => response.json());
   console.log(data);
   return {
     props: {

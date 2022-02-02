@@ -18,7 +18,13 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function CardMediaUsers({ image, typo, alt, typoCity }) {
+export default function CardMediaUsers({
+  image,
+  typo,
+  alt,
+  typoCity,
+  className,
+}) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -27,6 +33,7 @@ export default function CardMediaUsers({ image, typo, alt, typoCity }) {
     <Card>
       <CardMedia component="img" image={image} alt={alt} />
       <CardContent
+        className={className}
         sx={{
           textAlign: "center",
         }}
