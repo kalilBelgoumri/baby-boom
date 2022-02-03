@@ -1,16 +1,13 @@
 import Head from "next/head";
 import Layout from "../components/Layout";
 import { useState, useEffect } from "react";
-import Search from "../components/Search";
 import group from "../assets/group.svg";
 import messages from "../assets/messages.png";
 import { useRouter } from "next/router";
 import CardMedia from "../components/CardMedia";
 import Image from "next/image";
 import background from "../public/assets/background.jpg";
-import { useRef } from "react";
 import AlgoliaPlaces from "algolia-places-react";
-import { appId, apiKeyAlgolia, apiKey } from "../environment";
 
 export default function Home({ results }) {
   const [url, setUrl] = useState("");
@@ -93,12 +90,13 @@ export default function Home({ results }) {
                   placeholder="Write an address here"
                   onChange={({ suggestion }) =>
                     setUrl(
-                      `https://api.openweathermap.org/data/2.5/weather?lat=${suggestion.latlng.lat}&lon=${suggestion.latlng.lng}&appid=${apiKey}&units=metric`
+                      `https://api.openweathermap.org/data/2.5/weather?lat=${suggestion.latlng.lat}&lon=${suggestion.latlng.lng}&appid=${process.env.NEXT_PUBLIC_APP_ID_API_KEY}&units=metric`
                     )
                   }
                   options={{
-                    appId,
-                    apiKey: apiKeyAlgolia,
+                    appid: process.env.NEXT_PUBLIC_APP_ID_API_KEY,
+                    apiKey: process.env.NEXT_PUBLIC_OPEN_WEATHER_API_KEY,
+                    apiKeyAlgolia: process.env.NEXT_PUBLIC_API_KEY_ALGOLIA,
                     aroundLatLngViaIP: false,
                   }}
                 />
