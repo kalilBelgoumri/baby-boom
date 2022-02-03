@@ -9,21 +9,21 @@ import CardMedia from "../components/CardMedia";
 import Image from "next/image";
 import background from "../public/assets/background.jpg";
 import { useRef } from "react";
-import ServiceResult from "../components/ServiceResult";
+import AlgoliaPlaces from "algolia-places-react";
+import { appId, apiKeyAlgolia, apiKey } from "../environment";
 
 export default function Home({ results }) {
+  const [url, setUrl] = useState("");
   const router = useRouter();
   const uniqid = require("uniqid");
   console.log(uniqid());
 
-  const inputSearchRef = useRef(null);
-
-  const searchs = (e) => {
-    e.preventDefault();
-    const term = inputSearchRef.current.value;
-    if (!term) return;
-    router.push(`/listBaby/?term=${term}`);
-  };
+  // const searchs = (e) => {
+  //   e.preventDefault();
+  //   const term = inputSearchRef.current.value;
+  //   if (!term) return;
+  //   router.push(`/listBaby/?term=${term}`);
+  // };
 
   // Card city
   const city = [
@@ -73,6 +73,12 @@ export default function Home({ results }) {
       image: "https://i.ibb.co/TWnKkmL/11098467.jpg",
     },
   ];
+  const checkKeyPress = (e) => {
+    const { key, keyCode } = e;
+    if (keyCode === 13) {
+      router.push(`/listBaby/?Resultat=lyon`);
+    }
+  };
 
   return (
     <>
@@ -80,7 +86,23 @@ export default function Home({ results }) {
         <header>
           <div className="flex justify-center">
             <div className="absolute z-50 mt-10 w-[80%] md:w-[70%] ">
-              <Search inputRef={inputSearchRef} onClick={searchs} />
+              <div className="rounded-xl">
+                <AlgoliaPlaces
+                  className="rounded-full"
+                  onKeyDown={checkKeyPress}
+                  placeholder="Write an address here"
+                  onChange={({ suggestion }) =>
+                    setUrl(
+                      `https://api.openweathermap.org/data/2.5/weather?lat=${suggestion.latlng.lat}&lon=${suggestion.latlng.lng}&appid=${apiKey}&units=metric`
+                    )
+                  }
+                  options={{
+                    appId,
+                    apiKey: apiKeyAlgolia,
+                    aroundLatLngViaIP: false,
+                  }}
+                />
+              </div>
             </div>
             <Image className="z-10" src={background} alt="test" />
           </div>

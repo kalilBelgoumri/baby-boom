@@ -1,92 +1,42 @@
-import React, { useState, useEffect } from "react";
-import SearchIcon from "@mui/icons-material/Search";
-import { useRouter } from "next/router";
-import axios from "axios";
-import { style } from "@mui/system";
 
-// let poisSearch = require("../data/config/searchPoi");
-// let poiSearch = poisSearch.searchPoi;
 
-function SearchTemp() {
-  const router = useRouter();
-  const [search, setSearch] = useState(router.query.search || "");
-  const [results, setResults] = useState([]);
-  const [query, setQuery] = useState();
 
-  useEffect(() => {
-    if (search && router.pathname !== "/searchResults") {
-      axios
-        .post(
-          `https://apict-preprod.dag-system.com/appPoi/poi/list/`,
-          poiSearch(search),
-          {
-            headers: {
-              appId: "434364515444337a774f2b2b30495268414f7133446e6974",
-              appPassword: "4768452f48743052",
-              appName: "dashboard",
-              "Content-Type": "application/json",
-            },
-          }
-        )
-        .then((res) => res.data.poiList)
-        .then((poiList) => setResults(poiList))
-        .catch((err) => {
-          console.error(err.response.data);
-        });
-    }
-    // eslint-disable-next-line
-  }, [search]);
+import React from 'react';
+import AlgoliaPlaces from 'algolia-places-react';
 
+export default function SearchApp  ()  {
   return (
-    <div className="search-box mr-3">
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          if (search.length > 1) {
-            router.push(`/searchResults?search=${search}`);
-          }
-        }}
-      >
-        <button className="btn-search w-12 h-12">
-          <i className="fas fa-search">
-            <SearchIcon sx={{ fontSize: 36 }} />
-          </i>
-        </button>
-        <input
-          value={search}
-          type="text"
-          className="input-search"
-          placeholder="Recherche . . ."
-          onChange={(e) => {
-            setSearch(e.target.value);
-            setQuery(poiSearch(e.target.value));
-          }}
-        />
-      </form>
-      <div className="absolute z-50 bg-transparent max-h-30 w-[300px] overflow-scroll overflow-y-auto results">
-        {search &&
-          results
-            .filter((result) =>
-              result.informations.name
-                .toLowerCase()
-                .includes(result.informations.name.toLowerCase())
-            )
-            .map((result) => {
-              return (
-                <p
-                  className="p-2 text-primary bg-five bg-opacity-90 results hover:font-bold hover:bg-opacity-100 hover:shadow-md hover:cursor-pointer"
-                  onClick={() =>
-                    router.push(`/poiDetails/${encodeURIComponent(result._id)}`)
-                  }
-                  key={result._id}
-                >
-                  {result.informations.name}
-                </p>
-              );
-            })}
-      </div>
-    </div>
-  );
-}
+    <AlgoliaPlaces
+      placeholder='Write an address here'
 
-export default SearchTemp;
+
+
+      options={{
+        appId: 'MNNHUEZWOY',
+        apiKey: '9ecc99817aab593839e7aae3ff7b39b9',
+        language: 'sv',
+        countries: ['se'],
+        type: 'city',
+        // Other options from https://community.algolia.com/places/documentation.html#options
+      }}
+
+      onChange={({ query, rawAnswer, suggestion, suggestionIndex }) => 
+        console.log('Fired when suggestion selected in the dropdown or hint was validated.')}
+
+      onSuggestions={({ rawAnswer, query, suggestions }) => 
+        console.log('Fired when dropdown receives suggestions. You will receive the array of suggestions that are displayed.')}
+
+      onCursorChanged={({ rawAnswer, query, suggestion, suggestonIndex }) => 
+        console.log('Fired when arrows keys are used to navigate suggestions.')}
+
+      onClear={() => 
+        console.log('Fired when the input is cleared.')}
+
+      onLimit={({ message }) => 
+        console.log('Fired when you reached your current rate limit.')}
+
+      onError={({ message }) => 
+        console.log('Fired when we could not make the request to Algolia Places servers for any reason but reaching your rate limit.')}
+    />
+  );  
+}

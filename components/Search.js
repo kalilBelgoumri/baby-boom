@@ -6,6 +6,7 @@ import { useState } from "react";
 
 export default function Search({ className, onClick, inputRef }) {
   const [search, setSearch] = useState("");
+  
 
   return (
     <Paper
