@@ -13,6 +13,7 @@ const ServiceResult = ({
   price,
   description,
   vaccined,
+  car,
 }) => {
   return (
     <div className="flex flex-col justify-center m-4">
@@ -47,15 +48,9 @@ const ServiceResult = ({
                 </span>
               </p>
             </div>
-            <div className=" px-3 py-1 flex items-center justify-center rounded-full text-xs font-medium text-gray-800 hidden md:block ">
-              {/* <Image
-                src={src}
-                width="20px"
-                height="20px"
-                className="rounded-full"
-                alt="profil"
-              /> */}
+            <div className=" px-3 py-1 flex flex-col p-4 ">
               {vaccined}
+              <div className="inset-y-4">{car}</div>
             </div>
           </div>
           <h3 className="font-black text-gray-800 md:text-3xl text-xl">

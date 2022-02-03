@@ -4,65 +4,9 @@ import CardMedia from "../../components/CardMedia";
 import Router from "next/router";
 import ServiceResult from "../../components/ServiceResult";
 import VaccinesIcon from "@mui/icons-material/Vaccines";
+import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 
 export default function Baby({ results }) {
-  const test = [
-    {
-      id: 1,
-      firstname: "Christine",
-      city: "Lyon 3",
-      experience: "1 ans",
-      vaccined: false,
-      car: true,
-      picture: "/assets/users/avatar-16.jpg",
-    },
-
-    {
-      id: 2,
-      firstname: "Sandra",
-      city: "Lyon 8",
-      experience: "2 ans",
-      vaccined: true,
-      car: true,
-      picture: "/assets/users/avatar-19.jpg",
-    },
-    {
-      id: 4,
-      firstname: "Cassandre",
-      city: "Lyon 2",
-      experience: "5 ans",
-      vaccined: false,
-      car: true,
-      picture: "/assets/users/avatar-22.jpg",
-    },
-    {
-      id: 2,
-      firstname: "Elisabeth",
-      city: "Lyon",
-      experience: "2 ans",
-      vaccined: true,
-      car: true,
-      picture: "/assets/users/avatar-37.jpg",
-    },
-    {
-      id: 2,
-      firstname: "Audrey",
-      city: "Lyon 4",
-      experience: "4 ans",
-      vaccined: false,
-      car: false,
-      picture: "/assets/users/avatar-39.jpg",
-    },
-    {
-      id: 2,
-      firstname: "Priscilla",
-      city: "Lyon 1",
-      experience: "3 ans",
-      vaccined: true,
-      car: true,
-      picture: "/assets/users/avatar-25.jpg",
-    },
-  ];
   return (
     <>
       <Layout page="Search result">
@@ -84,10 +28,10 @@ export default function Baby({ results }) {
                       nb="18"
                       name={result.firstname}
                       city={result.city}
-                      description="Assistante maternelle agréée et titulaire du cap petite enfance, j'ai un agrément pour 4 enfants et un périscolaire. 
-                      Je suis disponible."
-                      price={"45"}
+                      description={result.description}
+                      price={result.price}
                       vaccined={result.vaccined ? <VaccinesIcon /> : null}
+                      car={result.car ? <DirectionsCarIcon /> : null}
                     />
                   </li>
                 </div>
