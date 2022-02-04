@@ -1,0 +1,165 @@
+main {
+    height: 100vh;
+    z-index: 50;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 50;
+    top: 0;
+    left: 0;
+    background-color: blue;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav span:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: -15px;
+    right: 10px;
+    font-size: 45px;
+    margin-left: 50px;
+}
+
+#main {
+    transition: margin-left 0.5s;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+    .sidenav a {
+        font-size: 18px;
+    }
+}
+
+
+/* MENU */
+
+.nav-item-container {
+    display: flex;
+    align-items: center;
+}
+
+
+/* ACCUEIL */
+
+.icon-container-accueil {
+    height: 100%;
+    margin-right: 16px;
+    background-color: var(--mainColor);
+    border-radius: 1rem 0 0 1rem;
+    padding: 8px;
+}
+
+.accueil {
+    background-color: var(--quarternaryColor);
+    color: var(--accentColor);
+}
+
+
+/* TOURISME */
+
+.icon-container-tourisme {
+    height: 100%;
+    margin-right: 16px;
+    background-color: #45b471;
+    border-radius: 1rem 0 0 1rem;
+    padding: 8px;
+}
+
+.tourisme {
+    background-color: #54d387e5;
+    color: var(--mainColor);
+}
+
+
+/* SPORT */
+
+.icon-container-sport {
+    height: 100%;
+    margin-right: 16px;
+    background-color: #e5d26b;
+    border-radius: 1rem 0 0 1rem;
+    padding: 8px;
+}
+
+.sport {
+    background-color: #e5d36bc9;
+    color: var(--mainColor);
+}
+
+
+/* SKI */
+
+.icon-container-ski {
+    height: 100%;
+    margin-right: 16px;
+    background-color: #afafaf;
+    border-radius: 1rem 0 0 1rem;
+    padding: 8px;
+}
+
+.ski {
+    background-color: #afafaf80;
+    color: var(--mainColor);
+}
+
+
+/* MON COMPTE */
+
+.icon-container-compte {
+    height: 100%;
+    margin-right: 16px;
+    background-color: #df9b9b;
+    border-radius: 1rem 0 0 1rem;
+    padding: 8px;
+}
+
+.compte {
+    background-color: #df9b9bbd;
+    color: var(--mainColor);
+}
+
+
+/* GESTIONNAIRES */
+
+.icon-container-gestionnaire {
+    height: 100%;
+    margin-right: 16px;
+    background-color: #dca97a;
+    border-radius: 1rem 0 0 1rem;
+    padding: 8px;
+}
+
+.gestionnaire {
+    background-color: #dfbc9b;
+    color: var(--mainColor);
+}
+
+
+/* CONNEXION */
+
+.icon-container-connexion {
+    height: 100%;
+    margin: 40px;
+    padding: 8px;
+    text-align: center;
+    color: white;
+}

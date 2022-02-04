@@ -87,7 +87,7 @@ export default function Home({ results }) {
                 <AlgoliaPlaces
                   className="rounded-full"
                   onKeyDown={checkKeyPress}
-                  placeholder="Write an address here"
+                  placeholder="Chercher votre nounou partous en France ..."
                   onChange={({ suggestion }) =>
                     setUrl(
                       `https://api.openweathermap.org/data/2.5/weather?lat=${suggestion.latlng.lat}&lon=${suggestion.latlng.lng}&appid=${process.env.NEXT_PUBLIC_APP_ID_API_KEY}&units=metric`

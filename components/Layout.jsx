@@ -7,6 +7,7 @@ import firebase from "../firebase/Firebase";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Fingerprint from "@mui/icons-material/Fingerprint";
+import IconMenu from "./SearchTemps.";
 
 const Layout = ({ children, page }) => {
   const router = useRouter();
@@ -32,7 +33,14 @@ const Layout = ({ children, page }) => {
         <div className="flex shadow-2xl justify-between ">
           <div className="container flex items-center cursor-pointer">
             {/* Hamburger Menu */}
-            <Hamburger toggled={isOpen} toggle={setOpen} />
+            {/* <Hamburger toggled={isOpen} toggle={setOpen} /> */}
+
+            <Hamburger
+              style={{ width: isOpen ? 500 : 0 }}
+              onToggle={(toggled) => {
+                toggled ? <IconMenu /> : null;
+              }}
+            />
           </div>
           <div className="flex">
             {!firebase.isLoggedIN() && (
@@ -48,7 +56,12 @@ const Layout = ({ children, page }) => {
                 {/* <p className="text-sm text-center mr-5  ">
                   {`${user.displayName}`}
                 </p> */}
-                <Avatar src={user.photoURL} />
+                <div className="py-10">
+                  <Avatar
+                    sx={{ width: 50, height: 50, overflow: "hidden" }}
+                    src={user.photoURL}
+                  />
+                </div>
               </div>
             )}
             {!firebase.isLoggedIN() && (
@@ -81,8 +94,7 @@ const Layout = ({ children, page }) => {
         {/* <div className={`"hamburgerOpen flex bg-orange-500 w-full items-center justify-end cursor-pointer"
           ${show && 'hamburgerOpen'}`}
         >
-        </div> */}
-        {/* Backgound */}
+        </div>  */}
         {/* <Image img src={background} alt="background" property="responsive" /> */}
       </header>
       <main className="flex-1">{children} </main>

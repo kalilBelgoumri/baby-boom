@@ -1,42 +1,38 @@
+import React from 'react'
+import { Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react'
 
+const IconMenu = () => (
+  <Sidebar.Pushable as={Segment}>
+    <Sidebar
+      as={Menu}
+      animation='overlay'
+      icon='labeled'
+      inverted
+      vertical
+      visible
+      width='thin'
+    >
+      <Menu.Item as='a'>
+        <Icon name='home' />
+        Home
+      </Menu.Item>
+      <Menu.Item as='a'>
+        <Icon name='gamepad' />
+        Games
+      </Menu.Item>
+      <Menu.Item as='a'>
+        <Icon name='camera' />
+        Channels
+      </Menu.Item>
+    </Sidebar>
 
+    <Sidebar.Pusher>
+      <Segment basic>
+        <Header as='h3'>Application Content</Header>
+        <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
+      </Segment>
+    </Sidebar.Pusher>
+  </Sidebar.Pushable>
+)
 
-import React from 'react';
-import AlgoliaPlaces from 'algolia-places-react';
-
-export default function SearchApp  ()  {
-  return (
-    <AlgoliaPlaces
-      placeholder='Write an address here'
-
-
-
-      options={{
-        appId: 'MNNHUEZWOY',
-        apiKey: '9ecc99817aab593839e7aae3ff7b39b9',
-        language: 'sv',
-        countries: ['se'],
-        type: 'city',
-        // Other options from https://community.algolia.com/places/documentation.html#options
-      }}
-
-      onChange={({ query, rawAnswer, suggestion, suggestionIndex }) => 
-        console.log('Fired when suggestion selected in the dropdown or hint was validated.')}
-
-      onSuggestions={({ rawAnswer, query, suggestions }) => 
-        console.log('Fired when dropdown receives suggestions. You will receive the array of suggestions that are displayed.')}
-
-      onCursorChanged={({ rawAnswer, query, suggestion, suggestonIndex }) => 
-        console.log('Fired when arrows keys are used to navigate suggestions.')}
-
-      onClear={() => 
-        console.log('Fired when the input is cleared.')}
-
-      onLimit={({ message }) => 
-        console.log('Fired when you reached your current rate limit.')}
-
-      onError={({ message }) => 
-        console.log('Fired when we could not make the request to Algolia Places servers for any reason but reaching your rate limit.')}
-    />
-  );  
-}
+export default IconMenu
