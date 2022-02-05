@@ -103,39 +103,47 @@ export default function Home({ results }) {
             })}
           </ul> */}
           <div className="mt-10" />
-
-          <p className="text-center text-xl sm:text-3xl">
-            Votre recherche de Baby-sitter simplifié
-          </p>
-          <div className="flex justify-center items-center mb-10">
-            <Image src={group} height="100" width="100" />
-          </div>
-          <p className="text-center text-xl sm:text-3xl mb-10 font-body">
-            Publier une annonce gratuitement
-          </p>
-          <p className="text-center text-xl sm:text-3xl mb-10">
-            Partager ce dont vous avez besoin pour que les bonnes personnes vous
-            trouvent
-          </p>
-          <div className="flex justify-center items-center mb-10">
-            <Image src={messages} />
-          </div>
-          <div className="flex flex-col space-y-4 justify-center items-center md:flex-row md:justify-center md:items-center">
-            <div className="px-10 ">
-              <Button  size="large" onClick={() => router.push("/Baby")} variant="contained">
-                Trouver votre Baby-Sitter
-              </Button>
+          <div className="columns-1 lg:columns-2">
+            <p className="text-center text-xl sm:text-3xl">
+              Votre recherche de Baby-sitter simplifié
+            </p>
+            <div className="flex justify-center items-center mb-10">
+              <Image src={group} height="100" width="100" />
             </div>
+            <p className="text-center text-xl sm:text-3xl mb-10 font-body">
+              Publier une annonce gratuitement
+            </p>
+            <p className="text-center text-xl sm:text-3xl mb-10">
+              Partager ce dont vous avez besoin pour que les bonnes personnes
+              vous trouvent
+            </p>
+            <div className="flex justify-center items-center mb-10">
+              <Image src={messages} />
+            </div>
+            <div className="flex justify-center">
+              <div className="flex gap-5 flex-col items-center md:flex-row">
+                <Button
+                  size="large"
+                  onClick={() => router.push("/Baby")}
+                  variant="contained"
+                >
+                  Trouver votre Baby-Sitter
+                </Button>
 
-            <Button size="large"  onClick={() => router.push("/Baby")} variant="contained">
-            Trouver votre Baby-Sitter
-            </Button>
+                <Button
+                  size="large"
+                  onClick={() => router.push("/Baby")}
+                  variant="contained"
+                >
+                  Trouver votre Baby-Sitter
+                </Button>
+              </div>
+            </div>
           </div>
 
           <p className="text-center text-xl sm:text-3xl mb-10 mt-10">
             Nos baby-sitters
           </p>
-
           {/* Baby-sitters */}
           <div className="flex gap-5 md:snap-x overflow-x-auto px-4 mb-10">
             <div className="snap-start relative flex gap-5">

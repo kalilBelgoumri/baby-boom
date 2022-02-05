@@ -3,7 +3,14 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ArrowDropDownCircleIcon from "@mui/icons-material/ArrowDropDownCircle";
-export default function PositionedMenu({logout,profile}) {
+import firebase from "../firebase/Firebase";
+
+export default function PositionedMenu({
+  logout,
+  profile,
+  connexion,
+  enregistrer,
+}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -39,8 +46,18 @@ export default function PositionedMenu({logout,profile}) {
           horizontal: "left",
         }}
       >
-        <MenuItem onClick={handleClose}>{profile}</MenuItem>
-        <MenuItem onClick={handleClose}>{logout}</MenuItem>
+        {firebase.isLoggedIN() && (
+          <MenuItem onClick={handleClose}>{profile}</MenuItem>
+        )}
+        {firebase.isLoggedIN() && (
+          <MenuItem onClick={handleClose}>{logout}</MenuItem>
+        )}
+        {!firebase.isLoggedIN() && (
+          <MenuItem onClick={handleClose}>{connexion}</MenuItem>
+        )}
+        {!firebase.isLoggedIN() && (
+          <MenuItem onClick={handleClose}>{enregistrer}</MenuItem>
+        )}
       </Menu>
     </div>
   );
