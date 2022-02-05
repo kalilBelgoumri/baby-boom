@@ -9,6 +9,9 @@ import IconButton from "@mui/material/IconButton";
 import Fingerprint from "@mui/icons-material/Fingerprint";
 import PositionedMenu from "./MenuLayout";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import LogoutIcon from "@mui/icons-material/Logout";
+import MailIcon from "@mui/icons-material/Mail";
+import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 
 const Layout = ({ children, page }) => {
   const router = useRouter();
@@ -31,45 +34,52 @@ const Layout = ({ children, page }) => {
         <title>{page}</title>
       </Head>
       <header>
-        <div className="flex shadow-2xl justify-between bg-gray-700 ">
-          <div className="container flex items-center cursor-pointer"></div>
-          <div className="flex">
-            {!firebase.isLoggedIN() && (
-              <div className="flex items-center mr-3">
-                <PositionedMenu
-                  connexion={
+        <div className="flex shadow-2xl bg-black bg-opacity-80 h-20 justify-end">
+          <div className="container flex items-center" />
+
+          {!firebase.isLoggedIN() && (
+            <div className="flex items-center">
+              <PositionedMenu
+                connexion={
+                  <div className="flex items-center">
                     <IconButton
                       onClick={() => router.push("/login")}
                       aria-label="fingerprint"
                       color="secondary"
                     >
-                      <div className="flex items-center">
-                        <Fingerprint />
-                        <p className="text-xs px-3">Connexion</p>
-                      </div>
+                      <Fingerprint />
                     </IconButton>
-                  }
-                  enregistrer={
+                    <p className="text-sm font-bold text-black">Connexion</p>
+                  </div>
+                }
+                enregistrer={
+                  <div className="flex items-center">
                     <IconButton
                       onClick={() => router.push("/create-account")}
                       aria-label="fingerprint"
                       color="secondary"
-                      >
-                      <div className="flex items-center">
-                        <AccountCircleIcon />
-                        <p className="text-xs px-3">S'enregistrer</p>
-                      </div>
-                      </IconButton>
-                  }
-                />
-              </div>
-            )}
-          </div>
+                    >
+                      <AccountCircleIcon />
+                    </IconButton>
+                    <p className="text-sm font-bold text-black">
+                      S'enregistrer
+                    </p>
+                  </div>
+                }
+              />
+            </div>
+          )}
           {firebase.isLoggedIN() && (
-            <div className="flex items-center mr-5">
-              {/* <p className="text-sm text-center mr-5  ">
+            <div className="flex items-center">
+              <div className="mr-5 cursor-pointer flex">
+                <NotificationsNoneIcon sx={{ color: "white" }} />
+                <div className="px-5">
+                  <MailIcon sx={{ color: "white" }} />
+                </div>
+                {/* <p className="text-sm text-center mr-5  ">
                   {`${user.displayName}`}
                 </p> */}
+              </div>
               <div className="py-2">
                 <Avatar
                   sx={{ width: 50, height: 50, overflow: "hidden" }}
@@ -79,39 +89,36 @@ const Layout = ({ children, page }) => {
             </div>
           )}
           {firebase.isLoggedIN() && (
-            <div className="flex items-center mr-3">
+            <div className="flex items-center">
               <PositionedMenu
                 logout={
-                  <IconButton
-                    onClick={async () => {
-                      await firebase.logout();
-                      router.push("/");
-                    }}
-                    aria-label="fingerprint"
-                    color="secondary"
-                  >
-                    <div className="flex items-center">
-                      <Fingerprint />
-                      <p className="text-xs px-3">Logout</p>
-
-                    </div>
-                  </IconButton>
-                  
+                  <div className="flex items-center">
+                    <IconButton
+                      onClick={async () => {
+                        await firebase.logout();
+                        router.push("/");
+                      }}
+                      aria-label="fingerprint"
+                      color="secondary"
+                    >
+                      <LogoutIcon />
+                    </IconButton>
+                    <p className="text-sm font-bold text-black">Deconnexion</p>
+                  </div>
                 }
-                
                 profile={
-                  <IconButton
-                    onClick={() => {
-                      router.push("/dashboard");
-                    }}
-                    aria-label="fingerprint"
-                    color="secondary"
-                  >
-                    <div className="flex items-center">
+                  <div className="flex items-center">
+                    <IconButton
+                      onClick={() => {
+                        router.push("/dashboard");
+                      }}
+                      aria-label="fingerprint"
+                      color="secondary"
+                    >
                       <AccountCircleIcon />
-                      <p className="text-xs px-3">Profile</p>
-                    </div>
-                  </IconButton>
+                    </IconButton>
+                    <p className="text-sm font-bold text-black">Profile</p>
+                  </div>
                 }
               />
             </div>

@@ -64,7 +64,9 @@ export default function CardMediaUsers({
             color: "#B538A8",
             cursor: "pointer",
           }}
-        ></IconButton>
+        >
+          
+        </IconButton>
         <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
       </CardActions>
     </Card>
