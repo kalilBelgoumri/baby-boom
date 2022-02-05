@@ -6,7 +6,7 @@ import firebase from "../../firebase/Firebase";
 import HomeIcon from "@mui/icons-material/Home";
 import LayoutUsers from "../../components/LayoutUsers";
 import MenuExampleVerticalDropdown from "../../components/indexNew";
-
+import ImageUploader from '../../components/Upload'
 export default function dashboard() {
   useEffect(() => {
     if (!firebase.isLoggedIN()) {
@@ -55,13 +55,16 @@ export default function dashboard() {
                       src={user.photoURL}
                       alt="test"
                     />
+                       <ImageUploader />
                   </div>
                 )}
               </div>
             </div>
           </div>
+         
         </main>
       </LayoutUsers>
     </>
   );
 }
+

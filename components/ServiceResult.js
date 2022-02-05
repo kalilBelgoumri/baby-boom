@@ -70,11 +70,7 @@ const ServiceResult = ({
           </div>
 
           <div className="mt-4 flex justify-center">
-            <Link passHref href="/service/details">
-              <button className="py-2 mt-8 text-ml uppercase font-bold w-2/4 text-one text-center bg-four rounded-lg hover:bg-three hover:text-five focus:ring-4 focus:ring-blue-300 ">
-                Plus d&#39;information
-              </button>
-            </Link>
+           
           </div>
         </div>
       </div>

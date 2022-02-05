@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Layout from "../components/Layout";
 import { useState, useEffect } from "react";
 import group from "../assets/group.svg";
@@ -8,6 +7,7 @@ import CardMedia from "../components/CardMedia";
 import Image from "next/image";
 import background from "../public/assets/background.jpg";
 import AlgoliaPlaces from "algolia-places-react";
+import Button from "@mui/material/Button";
 
 export default function Home({ results }) {
   const [url, setUrl] = useState("");
@@ -44,31 +44,6 @@ export default function Home({ results }) {
       title: "marseille",
       image: "https://i.ibb.co/TWnKkmL/11098467.jpg",
     },
-    {
-      id: 5,
-      title: "marseille",
-      image: "https://i.ibb.co/TWnKkmL/11098467.jpg",
-    },
-    {
-      id: 6,
-      title: "marseille",
-      image: "https://i.ibb.co/TWnKkmL/11098467.jpg",
-    },
-    {
-      id: 7,
-      title: "marseille",
-      image: "https://i.ibb.co/TWnKkmL/11098467.jpg",
-    },
-    {
-      id: 8,
-      title: "marseille",
-      image: "https://i.ibb.co/TWnKkmL/11098467.jpg",
-    },
-    {
-      id: 9,
-      title: "marseille",
-      image: "https://i.ibb.co/TWnKkmL/11098467.jpg",
-    },
   ];
   const checkKeyPress = (e) => {
     const { key, keyCode } = e;
@@ -82,6 +57,7 @@ export default function Home({ results }) {
       <Layout page="Home flex">
         <header>
           <div className="flex justify-center">
+            <Image className="z-10" src={background} alt="test" />
             <div className="absolute z-50 mt-10 w-[80%] md:w-[70%] ">
               <div className="rounded-xl">
                 <AlgoliaPlaces
@@ -102,25 +78,32 @@ export default function Home({ results }) {
                 />
               </div>
             </div>
-            <Image className="z-10" src={background} alt="test" />
           </div>
         </header>
         <main>
-          <ul className="flex w-full gap-2 overflow-x-auto mt-10 mb-10 snap-x">
+          {/* <ul className="flex w-full gap-2 overflow-x-auto mt-10 mb-10 snap-x">
             {city.map((citys) => {
               return (
-                <div className="flex flex-shrink-0 relative ml-3 snap-center">
-                  <li key={citys.uniqid}></li>
-                  <img
-                    className="rounded-lg cursor-pointer hover:transition-opacity delay-300 object-cover object-bottom w-40 h-36
+                <div
+                  key={uniqid()}
+                  className="flex flex-shrink-0 relative ml-3 snap-center"
+                >
+                  <Image
+                    className="rounded-lg cursor-pointer hover:transition-opacity delay-300 object-cover object-bottom w-48 h-26
                     md:w-56 md:h-56 lg:w-60 lg:h-60"
                     src={citys.image}
+                    title="Paris"
                     alt="paris"
-                  ></img>
+                    Layout="responsive"
+                    width={200}
+                    height={200}
+                  />
                 </div>
               );
             })}
-          </ul>
+          </ul> */}
+          <div className="mt-10" />
+
           <p className="text-center text-xl sm:text-3xl">
             Votre recherche de Baby-sitter simplifié
           </p>
@@ -137,23 +120,20 @@ export default function Home({ results }) {
           <div className="flex justify-center items-center mb-10">
             <Image src={messages} />
           </div>
-          <div className="flex flex-col justify-center items-center">
-            <button
-              onClick={() => router.push("/Baby")}
-              className="text-black text-lg h-16 py-2 px-8 cursor-pointer bg-[#B538A8] rounded-lg mb-5 font-body"
-            >
-              Trouver votre Baby-Sitter
-            </button>
-            <button
-              onClick={() => router.push("/Baby")}
-              className="text-black text-lg h-16 py-2 px-16 cursor-pointer rounded-lg shadow-lg shadow-blue-500/40 hover:shadow-indigo-500/40 mb-5"
-            >
-              Je suis baby-sitter
-            </button>
+          <div className="flex flex-col space-y-4 justify-center items-center md:flex-row md:justify-center md:items-center">
+            <div className="px-10 ">
+              <Button  size="large" onClick={() => router.push("/Baby")} variant="contained">
+                Trouver votre Baby-Sitter
+              </Button>
+            </div>
+
+            <Button size="large"  onClick={() => router.push("/Baby")} variant="contained">
+            Trouver votre Baby-Sitter
+            </Button>
           </div>
 
           <p className="text-center text-xl sm:text-3xl mb-10 mt-10">
-            Nos BABY-STTERS
+            Nos baby-sitters
           </p>
 
           {/* Baby-sitters */}
@@ -161,61 +141,29 @@ export default function Home({ results }) {
             <div className="snap-start relative flex gap-5">
               <ul className="text-center w-full flex items-center justify-center gap-5">
                 {results.results.map((result) => {
-                  console.log(result);
                   return (
-                    <>
-                      <li className="text-center" key={result.id}>
-                        <div className="flex w-full items-center justify-center">
-                          <CardMedia
-                            className="w-full"
-                            image={result.picture.large}
-                            typo={result.name.last}
-                            typo={result.name.first}
-                            typoCity={result.location.city}
-                          />
-                        </div>
+                    <div
+                      key={uniqid()}
+                      className="flex w-full items-center justify-center"
+                    >
+                      <li className="text-center">
+                        <CardMedia
+                          className="w-96"
+                          image={result.picture.large}
+                          typo={result.name.last}
+                          typo={result.name.first}
+                          typoCity={result.location.city}
+                        />
                       </li>
-                    </>
+                    </div>
                   );
                 })}
               </ul>
-              {/* <CardMedia
-                image="https://i.ibb.co/TWnKkmL/11098467.jpg"
-                typo="Francoise 42 ans"
-                typoCity="Lyon"
-              />
-              <CardMedia
-                image="https://i.ibb.co/TWnKkmL/11098467.jpg"
-                typo="Sandra 28 ans"
-                typoCity="Paris"
-              />
-              <CardMedia
-                image="https://i.ibb.co/TWnKkmL/11098467.jpg"
-                typo="Christelle 33 ans"
-                typoCity="Marseille"
-              />
-              <CardMedia
-                image="https://i.ibb.co/TWnKkmL/11098467.jpg"
-                typo="Christelle 33 ans"
-                typoCity="Marseille"
-              /> */}
             </div>
           </div>
           <div className="flex snap-x overflow-x-auto mb-10">
             <div className="snap-start relative flex gap-3 object-cover object-bottom px-5"></div>
           </div>
-
-          {/* <div className="px-10 w-full md:w-full lg:w-full flex items-center justify-center shadow-lg">
-            <div className="bg-blue-400 py-10 pr:3 flex items-center rounded mb-20 overflow-hidden shadow-xl border-2 border-red-800">
-              <Image
-                className="rounded-full"
-                src="/assets/christelle.jpg"
-                width={100}
-                height={100}
-              />
-              <h1>fdgfdgdfdg</h1>
-            </div>
-          </div> */}
         </main>
       </Layout>
     </>
@@ -225,7 +173,7 @@ export default function Home({ results }) {
 export async function getServerSideProps(context) {
   const useDummyData = false;
   const data = await fetch(
-    `https://randomuser.me/api/?gender=female&results=10&nat=fr`
+    `https://randomuser.me/api/?gender=female&results=20&nat=fr`
   ).then((response) => response.json());
   console.log(data);
   return {

@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import "../styles/theme.js";
 import "antd/dist/antd.css";
 import { useState, useEffect } from "react";
 import firebase from "../firebase/Firebase";

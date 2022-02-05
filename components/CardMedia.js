@@ -5,8 +5,8 @@ import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import StarBorderIcon from "@mui/icons-material/StarBorder";
-
+import Rating from "@mui/material/Rating";
+import Stack from "@mui/material/Stack";
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -64,13 +64,8 @@ export default function CardMediaUsers({
             color: "#B538A8",
             cursor: "pointer",
           }}
-        >
-          <StarBorderIcon />
-          <StarBorderIcon />
-          <StarBorderIcon />
-          <StarBorderIcon />
-          <StarBorderIcon />
-        </IconButton>
+        ></IconButton>
+        <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
       </CardActions>
     </Card>
   );

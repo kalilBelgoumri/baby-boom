@@ -62,70 +62,69 @@ export default function signup() {
       <Head>
         <title>Create-Account | Baby-Boom</title>
       </Head>
-        <div className=" mb-10  ">
-          <Image
-            className="object-center object-cover"
-            src={background}
-            alt="test"
-            layout="responsive"
-            height="30vw"
-            width="30vw"
-          />
-        </div>
-        <main className="fullscreenflexmiddle flex flex-col justify-center items-center">
-          <h2 style={{ fontSize: 25, marginBottom: 30 }}>Crée votre compte</h2>
-          <Form
-            onSubmit={onSubmit}
-            name="signup"
-            style={{ width: "100%", maxWidth: 350 }}
-            initialValues={{ remember: true }}
-            onFinish={doSignup} // When click the Signup Button
+      <div className=" mb-10  ">
+        <Image
+          src={background}
+          objectFit="cover"
+          objectPosition="center"
+          layout="fill"
+          id="background"
+          height={100}
+          width={100}
+        />
+      </div>
+      <main className="fullscreenflexmiddle flex flex-col justify-center items-center">
+        <h2 style={{ fontSize: 25, marginBottom: 30 }}>Crée votre compte</h2>
+        <Form
+          onSubmit={onSubmit}
+          name="signup"
+          style={{ width: "100%", maxWidth: 350 }}
+          initialValues={{ remember: true }}
+          onFinish={doSignup} // When click the Signup Button
+        >
+          <Form.Item name="name" rules={[{ required: true, message: "" }]}>
+            <Input size="large" prefix={<UserOutlined />} placeholder="Nom" />
+          </Form.Item>
+          <Form.Item name="email" rules={[{ required: true, message: "" }]}>
+            <Input size="large" prefix={<MailOutlined />} placeholder="Email" />
+          </Form.Item>
+          <Form.Item name="password" rules={[{ required: true, message: "" }]}>
+            <Input
+              size="large"
+              values={password}
+              prefix={<LockOutlined />}
+              type="password"
+              placeholder="Password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </Form.Item>
+          <Form.Item
+            value={password}
+            name="confirmPassword"
+            rules={[{ required: true, message: "" }]}
           >
-            <Form.Item name="name" rules={[{ required: true, message: "" }]}>
-              <Input size="large" prefix={<UserOutlined />} placeholder="Nom" />
-            </Form.Item>
-            <Form.Item name="email" rules={[{ required: true, message: "" }]}>
-              <Input
-                size="large"
-                prefix={<MailOutlined />}
-                placeholder="Email"
-              />
-            </Form.Item>
-            <Form.Item
-              name="password"
-              rules={[{ required: true, message: "" }]}
+            <Input
+              values={confirmPassword}
+              size="large"
+              prefix={<LockOutlined />}
+              type="password"
+              placeholder="Confirm Password"
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+          </Form.Item>
+          <Form.Item>
+            <Button
+              className="rounded-xl"
+              size="large"
+              type="primary"
+              htmlType="submit"
+              block
             >
-              <Input
-                size="large"
-                values={password}
-                prefix={<LockOutlined />}
-                type="password"
-                placeholder="Password"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </Form.Item>
-            <Form.Item
-              value={password}
-              name="confirmPassword"
-              rules={[{ required: true, message: "" }]}
-            >
-              <Input
-                values={confirmPassword}
-                size="large"
-                prefix={<LockOutlined />}
-                type="password"
-                placeholder="Confirm Password"
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
-            </Form.Item>
-            <Form.Item>
-              <Button size="large" type="primary" htmlType="submit" block>
-                S'enregistrer
-              </Button>
-            </Form.Item>
-          </Form>
-        </main>
-
+              S'enregistrer
+            </Button>
+          </Form.Item>
+        </Form>
+      </main>
     </>
   );
 }

@@ -8,6 +8,8 @@ import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Fingerprint from "@mui/icons-material/Fingerprint";
 import IconMenu from "./SearchTemps.";
+import PositionedMenu from "./MenuLayout";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 const Layout = ({ children, page }) => {
   const router = useRouter();
@@ -35,12 +37,12 @@ const Layout = ({ children, page }) => {
             {/* Hamburger Menu */}
             {/* <Hamburger toggled={isOpen} toggle={setOpen} /> */}
 
-            <Hamburger
+            {/* <Hamburger
               style={{ width: isOpen ? 500 : 0 }}
               onToggle={(toggled) => {
                 toggled ? <IconMenu /> : null;
               }}
-            />
+            /> */}
           </div>
           <div className="flex">
             {!firebase.isLoggedIN() && (
@@ -56,7 +58,7 @@ const Layout = ({ children, page }) => {
                 {/* <p className="text-sm text-center mr-5  ">
                   {`${user.displayName}`}
                 </p> */}
-                <div className="py-10">
+                <div className="py-2">
                   <Avatar
                     sx={{ width: 50, height: 50, overflow: "hidden" }}
                     src={user.photoURL}
@@ -76,17 +78,37 @@ const Layout = ({ children, page }) => {
             )}
             {firebase.isLoggedIN() && (
               <div className="flex items-center mr-3">
-                <IconButton
-                  onClick={async () => {
-                    await firebase.logout();
-                    router.push("/");
-                  }}
-                  aria-label="fingerprint"
-                  color="secondary"
-                >
-                  <Fingerprint />
-                </IconButton>
-                <p className="text-black text-xs font-bold">Deconnexion</p>
+                <PositionedMenu
+                  logout={
+                    <IconButton
+                      onClick={async () => {
+                        await firebase.logout();
+                        router.push("/");
+                      }}
+                      aria-label="fingerprint"
+                      color="secondary"
+                    >
+                      <div className="flex items-center">
+                        <Fingerprint />
+                        <p className="text-xs px-3">Logout</p>
+                      </div>
+                    </IconButton>
+                  }
+                  profile={
+                    <IconButton
+                      onClick={() => {
+                        router.push("/dashboard");
+                      }}
+                      aria-label="fingerprint"
+                      color="secondary"
+                    >
+                      <div className="flex items-center">
+                        <AccountCircleIcon />
+                        <p className="text-xs px-3">Profile</p>
+                      </div>
+                    </IconButton>
+                  }
+                />
               </div>
             )}
           </div>
