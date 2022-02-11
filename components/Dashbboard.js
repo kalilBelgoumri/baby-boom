@@ -17,7 +17,7 @@ import Profile from "../pages/dashboard/profile";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import firebase from "../firebase/Firebase";
 import Avatar from "@mui/material/Avatar";
-
+import HomeIcon from "@mui/icons-material/Home";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -93,16 +93,20 @@ export default function FullWidthTabs() {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          <Tab icon={<ContactMailIcon />} label="e-mail" {...a11yProps(0)} />
+          {" "}
+          <Tab icon={<HomeIcon />} label="Home" {...a11yProps(0)} />
+          <Tab icon={<ContactMailIcon />} label="e-mail" {...a11yProps(1)} />
           <Tab
             id="label"
             icon={<ContactPhoneIcon />}
             label="Phone"
-            {...a11yProps(1)}
+            {...a11yProps(2)}
           />
-          <Tab icon={<PinIcon />} label="Mot de passe" {...a11yProps(2)} />
-          <Tab icon={<AddAPhotoIcon />} label="Photo" {...a11yProps(3)} />
-
+          <Tab icon={<PinIcon />} label="Mot de passe" {...a11yProps(3)} />
+          <Tab icon={<AddAPhotoIcon />} label="Photo" {...a11yProps(4)} />
+          <span className="mr-5 font-bold uppercase hidden md:block">
+            {user.displayName}
+          </span>
           <div className="hidden md:block">
             <Avatar sx={{ width: 50, height: 50 }} src={user.photoURL} />
           </div>
@@ -114,15 +118,18 @@ export default function FullWidthTabs() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          <Profile />
+          Home
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          Item Two
+          <Profile />
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          Item Three
+          Item Two
         </TabPanel>
         <TabPanel value={value} index={3} dir={theme.direction}>
+          Item Three
+        </TabPanel>
+        <TabPanel value={value} index={4} dir={theme.direction}>
           Item Three
         </TabPanel>
       </SwipeableViews>

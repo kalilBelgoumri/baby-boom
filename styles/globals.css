@@ -25,3 +25,11 @@
   align-items: center;
   padding-right: 10px;
 }
+
+@media screen and (max-width: 450px) {
+  .MuiTabs-flexContainer {
+    display: flex;
+    flex-direction: column;
+    transition: all 5s ease-out;
+  }
+}
