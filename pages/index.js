@@ -107,21 +107,21 @@ export default function Home({ results }) {
             <p className="text-center text-xl sm:text-3xl">
               Votre recherche de Baby-sitter simplifié
             </p>
-            <div className="flex justify-center items-center mb-10">
+            <div className="mb-10 flex items-center justify-center">
               <Image src={group} height="100" width="100" />
             </div>
-            <p className="text-center text-xl sm:text-3xl mb-10 font-body">
+            <p className="font-body mb-10 text-center text-xl sm:text-3xl">
               Publier une annonce gratuitement
             </p>
-            <p className="text-center text-xl sm:text-3xl mb-10">
+            <p className="mb-10 text-center text-xl sm:text-3xl">
               Partager ce dont vous avez besoin pour que les bonnes personnes
               vous trouvent
             </p>
-            <div className="flex justify-center items-center mb-10">
+            <div className="mb-10 flex items-center justify-center">
               <Image src={messages} />
             </div>
             <div className="flex justify-center">
-              <div className="flex gap-5 flex-col items-center md:flex-row">
+              <div className="flex flex-col items-center gap-5 md:flex-row">
                 <Button
                   size="large"
                   onClick={() => router.push("/Baby")}
@@ -141,13 +141,13 @@ export default function Home({ results }) {
             </div>
           </div>
 
-          <p className="text-center text-xl sm:text-3xl mb-10 mt-10">
+          <p className="mb-10 mt-10 text-center text-xl sm:text-3xl">
             Nos baby-sitters
           </p>
           {/* Baby-sitters */}
-          <div className="flex gap-5 md:snap-x overflow-x-auto px-4 mb-10">
-            <div className="snap-start relative flex gap-5">
-              <ul className="text-center w-full flex items-center justify-center gap-5">
+          <div className="mb-10 flex gap-5 overflow-x-auto px-4 md:snap-x">
+            <div className="relative flex snap-start gap-5">
+              <ul className="flex w-full items-center justify-center gap-5 text-center">
                 {results.results.map((result) => {
                   return (
                     <div
@@ -169,8 +169,8 @@ export default function Home({ results }) {
               </ul>
             </div>
           </div>
-          <div className="flex snap-x overflow-x-auto mb-10">
-            <div className="snap-start relative flex gap-3 object-cover object-bottom px-5"></div>
+          <div className="mb-10 flex snap-x overflow-x-auto">
+            <div className="relative flex snap-start gap-3 object-cover object-bottom px-5"></div>
           </div>
         </main>
       </Layout>

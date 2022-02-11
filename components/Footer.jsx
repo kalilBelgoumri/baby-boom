@@ -4,7 +4,7 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 const Footer = () => {
   return (
     <>
-      <div className="text-white w-screen h-screen flex items-center justify-center flex-col mb-5 bg-[#B538A8]">
+      <div className="text-white w-screen h-20 flex items-center justify-center flex-col mb-5 bg-[#B538A8]">
         <p>Qui sommes-nous ?</p>
         <p>Mentions légale</p>
 

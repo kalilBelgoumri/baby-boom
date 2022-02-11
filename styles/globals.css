@@ -3,19 +3,25 @@
 @tailwind components;
 @tailwind utilities;
 .ant-input-affix-wrapper {
-    border-radius: 10px !important;
+  border-radius: 10px !important;
 }
 
 .login-form-button {
-    border-radius: 10px !important;
+  border-radius: 10px !important;
 }
 
 #background {
-    filter: blur(10px);
-    height: 100vh;
+  filter: blur(10px);
+  height: 100vh;
 }
 
 .styleBackground {
-    position: absolute;
-    z-index: 0;
+  position: absolute;
+  z-index: 0;
+}
+
+.MuiTabs-flexContainer {
+  display: flex;
+  align-items: center;
+  padding-right: 10px;
 }

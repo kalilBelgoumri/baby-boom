@@ -65,14 +65,14 @@ export default function ImageUploader() {
         // Now I can use url
         user.updateProfile({
           photoURL: url, // <- URL from uploaded photo.
-        })
-               setUploading(false);
+        });
+        setUploading(false);
         console.log(url);
       });
   };
 
   return (
-    <div className="box">
+    <div className="box flex justify-end">
       <Loader show={uploading} />
       {uploading && <h3>{progress}%</h3>}
 
