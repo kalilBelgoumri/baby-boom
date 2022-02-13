@@ -7,7 +7,6 @@ import { useState, useEffect } from "react";
 import background from "../assets/login.jpg";
 import Image from "next/image";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
-import { Footer } from "antd/lib/layout/layout";
 import Checkbox from "@mui/material/Checkbox";
 
 export default function Login() {

@@ -7,20 +7,17 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import Login from "../pages/login";
 import ContactMailIcon from "@mui/icons-material/ContactMail";
 import ContactPhoneIcon from "@mui/icons-material/ContactPhone";
 import PinIcon from "@mui/icons-material/Pin";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
-import { ClassNames } from "@emotion/react";
 import Profile from "../pages/dashboard/profile";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import firebase from "../firebase/Firebase";
 import Avatar from "@mui/material/Avatar";
 import HomeIcon from "@mui/icons-material/Home";
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-
+import Home from "../pages/dashboard/Home";
+import ImageUploader from "./Upload";
+function TabPanel({ children, value, index, ...other }) {
   return (
     <div
       role="tabpanel"
@@ -29,11 +26,7 @@ function TabPanel(props) {
       aria-labelledby={`full-width-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
     </div>
   );
 }
@@ -88,10 +81,8 @@ export default function FullWidthTabs() {
           style={styleNav}
           value={value}
           onChange={handleChange}
-          indicatorColor="inherit"
           textColor="inherit"
           variant="fullWidth"
-          aria-label="full width tabs example"
         >
           {" "}
           <Tab icon={<HomeIcon />} label="Home" {...a11yProps(0)} />
@@ -113,12 +104,12 @@ export default function FullWidthTabs() {
         </Tabs>
       </AppBar>
       <SwipeableViews
-        axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+        // axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={value}
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          Home
+          <Home />
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
           <Profile />
@@ -130,7 +121,7 @@ export default function FullWidthTabs() {
           Item Three
         </TabPanel>
         <TabPanel value={value} index={4} dir={theme.direction}>
-          Item Three
+          <ImageUploader />
         </TabPanel>
       </SwipeableViews>
     </Box>

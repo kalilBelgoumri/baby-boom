@@ -8,48 +8,24 @@ import background from "../assets/login.jpg";
 import Image from "next/image";
 
 export default function signup() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState(null);
 
-  //   const onSubmit = event => {
-  //   setError(null)
-  //   if(password === confirmPassword) {
-  //     console.log("error");
-  //   } else {
-  //     console.log("ok");
-  //   }
-  //   useEffect(() => {
-  //     if (firebase.isLoggedIN()) {
-  //       Router.push("/dashboard");
-  //     }
-
-  //   });
-  // }
-
-  const onSubmit = (event) => {
+  const onSubmit = (e) => {
     setError(null);
-    if (password === confirmPassword)
-      createUserWithEmailAndPassword(email, password, confirmPassword)
-        .then((authUser) => {
-          console.log("Success. The user is created in firebase");
-          router.push("/logged_in");
-        })
-        .catch((error) => {
-          setError(error.message);
-        });
-    else setError("Password do not match");
-    event.preventDefault();
   };
+
   async function doSignup(values) {
-    console.log(values); // Expected output {name: "Tuhin", email: "me@thetuhin.com", password: "123456789"}
-    message.loading({ key: "signup", content: "Signing up !" }); // Showing logging in message
+    console.log(values);
+    message.loading({ key: "signup", content: "S igning up !" });
     try {
       await firebase.register(values);
-      message.success({ key: "signup", content: "Signed up 🎉" }); // if success
+      message.success({ key: "signup", content: "Signed up 🎉" });
       Router.push("/login");
     } catch (error) {
-      // if error
       message.error({
         key: "signup",
         content: error.message || "Something went wrong !",
@@ -63,7 +39,7 @@ export default function signup() {
         <title>Create-Account | Baby-Boom</title>
       </Head>
       <div className=" mb-10  ">
-        <Image
+        {/* <Image
           src={background}
           objectFit="cover"
           objectPosition="center"
@@ -71,8 +47,9 @@ export default function signup() {
           id="background"
           height={100}
           width={100}
-        />
+        /> */}
       </div>
+      {error}
       <main className="fullscreenflexmiddle flex flex-col justify-center items-center">
         <h2 style={{ fontSize: 25, marginBottom: 30 }}>Crée votre compte</h2>
         <Form
@@ -82,12 +59,28 @@ export default function signup() {
           initialValues={{ remember: true }}
           onFinish={doSignup} // When click the Signup Button
         >
-          <Form.Item name="name" rules={[{ required: true, message: "" }]}>
-            <Input size="large" prefix={<UserOutlined />} placeholder="Nom" />
+          <Form.Item
+            name="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            rules={[{ required: true, message: "" }]}
+          >
+            <Input
+              size="large"
+              prefix={<MailOutlined />}
+              placeholder="Pseudo"
+            />
           </Form.Item>
-          <Form.Item name="email" rules={[{ required: true, message: "" }]}>
+
+          <Form.Item
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            rules={[{ required: true, message: "" }]}
+          >
             <Input size="large" prefix={<MailOutlined />} placeholder="Email" />
           </Form.Item>
+
           <Form.Item name="password" rules={[{ required: true, message: "" }]}>
             <Input
               size="large"

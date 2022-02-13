@@ -14,8 +14,8 @@ export default function ImageUploader() {
 
   const storage = firebase.storage();
   const auth = firebase.auth();
-  const STATE_CHANGED = firebase.storage.TaskEvent.STATE_CHANGED;
   const user = firebase.auth().currentUser;
+  const STATE_CHANGED = firebase.storage.TaskEvent.STATE_CHANGED;
 
   // Creates a Firebase Upload Task
   const uploadFile = async (e) => {
@@ -25,24 +25,6 @@ export default function ImageUploader() {
     // Makes reference to the storage bucket location
     const ref = storage.ref("uploads/" + user.uid + "/avatar.jpg");
     setUploading(true);
-
-    // avatarStgRef.put(file).then(function (snapshot) {
-    //   snapshot.ref.getDownloadURL().then(function (url) {
-    //     // Now I can use url
-    //     user
-    //       .updateProfile({
-    //         photoURL: url, // <- URL from uploaded photo.
-    //       })
-    //       .then(function () {
-    //         firebase
-    //           .database()
-    //           .ref("Usuarios/" + user.uid)
-    //           .set({
-    //             photoUri: url, // <- URL from uploaded photo.
-    //           });
-    //       });
-    //   });
-    // });
 
     // Starts the upload
     const task = ref.put(file);
@@ -89,9 +71,9 @@ export default function ImageUploader() {
         </>
       )}
       <div className="div flex items-center justify-center flex-col mt-20">
-        {/* {downloadURL && (
+        {downloadURL && (
           <img className="rounded-full w-20 h-20 mx-auto" src={downloadURL} />
-        )} */}
+        )}
         <div className="flex mt-10 mb-10"></div>
       </div>
     </div>

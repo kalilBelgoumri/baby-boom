@@ -1,5 +1,6 @@
-import fire from "firebase/app";
-import "firebase/auth";   
+import app from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore";
 
 const config = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_PUBLIC_API_KEY,
@@ -12,10 +13,11 @@ const config = {
 
 class getFirebase {
   constructor() {
-    if (!fire.apps.length) {
-      fire.initializeApp(config);
+    if (!app.apps.length) {
+      app.initializeApp(config);
     }
-    this.auth = fire.auth();
+    this.auth = app.auth();
+    this.db = app.firestore();
   }
 
   async login({ email, password }) {
@@ -26,14 +28,22 @@ class getFirebase {
     return await this.auth.signOut();
   }
 
-  async register({ name,photoURL, email, password }) {
-    await this.auth.createUserWithEmailAndPassword(email, password);
+  async register({ name, photoURL, email, password }) {
+    await this.auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((cred) => {
+        return this.db.collection("users").doc(cred.user.uid).set({
+          name,
+          password,
+        });
+      });
     await this.auth.currentUser.sendEmailVerification();
     return this.auth.currentUser.updateProfile({
       displayName: name,
       displayphotoURL: photoURL,
     });
   }
+  user = (uid) => this.db.doc(`users/${uid}`);
 
   isInitialized() {
     return new Promise((resolve) => {
@@ -72,7 +82,7 @@ class getFirebase {
       };
     }
   }
-  
+
   async sendVerification() {
     try {
       if (this.auth.currentUser) {
@@ -86,6 +96,5 @@ class getFirebase {
     }
   }
 }
-
 
 export default new getFirebase();
