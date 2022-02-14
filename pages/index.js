@@ -54,34 +54,33 @@ export default function Home({ results }) {
 
   return (
     <>
-      <Layout page="Home flex">
-        <header>
-          <div className="flex justify-center">
-            <Image className="z-10" src={background} alt="test" />
-            <div className="absolute z-50 mt-10 w-[80%] md:w-[70%] ">
-              <div className="rounded-xl">
-                <AlgoliaPlaces
-                  className="rounded-full"
-                  onKeyDown={checkKeyPress}
-                  placeholder="Chercher votre nounou partous en France ..."
-                  onChange={({ suggestion }) =>
-                    setUrl(
-                      `https://api.openweathermap.org/data/2.5/weather?lat=${suggestion.latlng.lat}&lon=${suggestion.latlng.lng}&appid=${process.env.NEXT_PUBLIC_APP_ID_API_KEY}&units=metric`
-                    )
-                  }
-                  options={{
-                    appid: process.env.NEXT_PUBLIC_APP_ID_API_KEY,
-                    apiKey: process.env.NEXT_PUBLIC_OPEN_WEATHER_API_KEY,
-                    apiKeyAlgolia: process.env.NEXT_PUBLIC_API_KEY_ALGOLIA,
-                    aroundLatLngViaIP: false,
-                  }}
-                />
-              </div>
+      <header>
+        <div className="flex justify-center">
+          <Image className="z-10 relative" src={background} alt="test" />
+          <div className="absolute z-50 mt-10 w-[80%] md:w-[70%] ">
+            <div className="rounded-xl">
+              <AlgoliaPlaces
+                className="rounded-full"
+                onKeyDown={checkKeyPress}
+                placeholder="Chercher votre nounou partous en France ..."
+                onChange={({ suggestion }) =>
+                  setUrl(
+                    `https://api.openweathermap.org/data/2.5/weather?lat=${suggestion.latlng.lat}&lon=${suggestion.latlng.lng}&appid=${process.env.NEXT_PUBLIC_APP_ID_API_KEY}&units=metric`
+                  )
+                }
+                options={{
+                  appid: process.env.NEXT_PUBLIC_APP_ID_API_KEY,
+                  apiKey: process.env.NEXT_PUBLIC_OPEN_WEATHER_API_KEY,
+                  apiKeyAlgolia: process.env.NEXT_PUBLIC_API_KEY_ALGOLIA,
+                  aroundLatLngViaIP: false,
+                }}
+              />
             </div>
           </div>
-        </header>
-        <main>
-          {/* <ul className="flex w-full gap-2 overflow-x-auto mt-10 mb-10 snap-x">
+        </div>
+      </header>
+      <main>
+        {/* <ul className="flex w-full gap-2 overflow-x-auto mt-10 mb-10 snap-x">
             {city.map((citys) => {
               return (
                 <div
@@ -102,78 +101,77 @@ export default function Home({ results }) {
               );
             })}
           </ul> */}
-          <div className="mt-10" />
-          <div className="columns-1 lg:columns-2">
-            <p className="text-center text-xl sm:text-3xl">
-              Votre recherche de Baby-sitter simplifié
-            </p>
-            <div className="mb-10 flex items-center justify-center">
-              <Image src={group} height="100" width="100" />
-            </div>
-            <p className="font-body mb-10 text-center text-xl sm:text-3xl">
-              Publier une annonce gratuitement
-            </p>
-            <p className="mb-10 text-center text-xl sm:text-3xl">
-              Partager ce dont vous avez besoin pour que les bonnes personnes
-              vous trouvent
-            </p>
-            <div className="mb-10 flex items-center justify-center">
-              <Image src={messages} />
-            </div>
-            <div className="flex justify-center">
-              <div className="flex flex-col items-center gap-5 md:flex-row">
-                <Button
-                  size="large"
-                  onClick={() => router.push("/Baby")}
-                  variant="contained"
-                >
-                  Trouver votre Baby-Sitter
-                </Button>
-
-                <Button
-                  size="large"
-                  onClick={() => router.push("/Baby")}
-                  variant="contained"
-                >
-                  Trouver votre Baby-Sitter
-                </Button>
-              </div>
-            </div>
-          </div>
-
-          <p className="mb-10 mt-10 text-center text-xl sm:text-3xl">
-            Nos baby-sitters
+        <div className="mt-10" />
+        <div className="columns-1 lg:columns-2">
+          <p className="text-center text-xl sm:text-3xl">
+            Votre recherche de Baby-sitter simplifié
           </p>
-          {/* Baby-sitters */}
-          <div className="mb-10 flex gap-5 overflow-x-auto px-4 md:snap-x">
-            <div className="relative flex snap-start gap-5">
-              <ul className="flex w-full items-center justify-center gap-5 text-center">
-                {results.results.map((result) => {
-                  return (
-                    <div
-                      key={uniqid()}
-                      className="flex w-full items-center justify-center"
-                    >
-                      <li className="text-center">
-                        <CardMedia
-                          className="w-96"
-                          image={result.picture.large}
-                          typo={result.name.last}
-                          typo={result.name.first}
-                          typoCity={result.location.city}
-                        />
-                      </li>
-                    </div>
-                  );
-                })}
-              </ul>
+          <div className="mb-10 flex items-center justify-center">
+            <Image src={group} height="100" width="100" />
+          </div>
+          <p className="font-body mb-10 text-center text-xl sm:text-3xl">
+            Publier une annonce gratuitement
+          </p>
+          <p className="mb-10 text-center text-xl sm:text-3xl">
+            Partager ce dont vous avez besoin pour que les bonnes personnes vous
+            trouvent
+          </p>
+          <div className="mb-10 flex items-center justify-center">
+            <Image src={messages} />
+          </div>
+          <div className="flex justify-center">
+            <div className="flex flex-col items-center gap-5 md:flex-row">
+              <Button
+                size="large"
+                onClick={() => router.push("/Baby")}
+                variant="contained"
+              >
+                Trouver votre Baby-Sitter
+              </Button>
+
+              <Button
+                size="large"
+                onClick={() => router.push("/Baby")}
+                variant="contained"
+              >
+                Trouver votre Baby-Sitter
+              </Button>
             </div>
           </div>
-          <div className="mb-10 flex snap-x overflow-x-auto">
-            <div className="relative flex snap-start gap-3 object-cover object-bottom px-5"></div>
+        </div>
+
+        <p className="mb-10 mt-10 text-center text-xl sm:text-3xl">
+          Nos baby-sitters
+        </p>
+        {/* Baby-sitters */}
+        <div className="mb-10 flex gap-5 overflow-x-auto px-4 md:snap-x">
+          <div className="relative flex snap-start gap-5">
+            <ul className="flex w-full items-center justify-center gap-5 text-center">
+              {results.results.map((result) => {
+                return (
+                  <div
+                    key={uniqid()}
+                    className="flex w-full items-center justify-center"
+                  >
+                    <li className="text-center">
+                      <CardMedia
+                        className="w-96"
+                        image={result.picture.large}
+                        typo={result.name.last}
+                        typo={result.name.first}
+                        typoCity={result.location.city}
+                      />
+                    </li>
+                  </div>
+                );
+              })}
+            </ul>
           </div>
-        </main>
-      </Layout>
+        </div>
+        <div className="mb-10 flex snap-x overflow-x-auto">
+          <div className="relative flex snap-start gap-3 object-cover object-bottom px-5"></div>
+        </div>
+      </main>
     </>
   );
 }

@@ -4,23 +4,15 @@ import firebase from "../../firebase/Firebase";
 import app from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
-import { data } from "autoprefixer";
 
 export default function index() {
-  const [, forceUpdate] = React.useState();
   const [name, setCustomerName] = useState("");
   const [password, setCustomerPassword] = useState("");
-  const [notesArray, setNotesArray] = useState([]);
+  const [usersArray, setUsersArray] = useState([]);
   const db = app.firestore();
   const user = firebase.auth.currentUser;
 
   // Get infos from firebase
-  // const docRef = db
-  //   .collection("users")
-  //   .doc(user.uid)
-  //   .onSnapshot((doc) => {
-  //     console.log("Current data: ", doc.data());
-  //   });
 
   useEffect(() => {
     db.collection("users")
@@ -28,10 +20,9 @@ export default function index() {
       .onSnapshot((doc) => {
         if (doc.exists) {
           const myData = doc.data();
-          setNotesArray(myData);
+          setUsersArray(myData);
           console.log("Document data:", doc.data());
         } else {
-          // doc.data() will be undefined in this case
           console.log("No such document!");
         }
       });
@@ -46,7 +37,7 @@ export default function index() {
       .doc(user.uid)
       .set({ name, password })
       .then(() => {
-        console.log("ok bien envoyer");
+        // SweetAlert confirm users information.
       })
       .catch((error) => {
         console.log(error.message);
@@ -54,7 +45,7 @@ export default function index() {
   };
 
   return (
-    <div className="">
+    <div>
       <Dashboard />
       <form onSubmit={submit}>
         <div className="App">
@@ -74,8 +65,7 @@ export default function index() {
             <button>Submit</button>
           </div>
           <li>
-            {" "}
-            {notesArray.name} {notesArray.password}{" "}
+            {usersArray.name} {usersArray.password}{" "}
           </li>
         </div>
       </form>

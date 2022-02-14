@@ -17,6 +17,7 @@ import Avatar from "@mui/material/Avatar";
 import HomeIcon from "@mui/icons-material/Home";
 import Home from "../pages/dashboard/Home";
 import ImageUploader from "./Upload";
+import Router from "next/router";
 function TabPanel({ children, value, index, ...other }) {
   return (
     <div
@@ -64,11 +65,11 @@ export default function FullWidthTabs() {
   };
 
   const user = firebase.auth.currentUser;
-  if (user !== null) {
-    // The user object has basic properties such as display name, email, etc.
-    user.displayName;
-    user.photoURL;
-  }
+  user !== null
+    ? user.displayName && user.photoURL
+    : alert(
+        "Vous n'avez pas acces a cette veuillez vous enregistrer ou vous connecter :)"
+      ) && Router.push("../create-account");
 
   return (
     <Box

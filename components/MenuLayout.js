@@ -29,8 +29,9 @@ export default function PositionedMenu({
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
       >
-        <ArrowDropDownCircleIcon sx={{ color: "white" }} />
+        <ArrowDropDownCircleIcon sx={{ color: "black" }} />
       </Button>
+
       <Menu
         id="demo-positioned-menu"
         aria-labelledby="demo-positioned-button"

@@ -34,9 +34,8 @@ const Layout = ({ children, page }) => {
         <title>{page}</title>
       </Head>
       <header>
-        <div className="flex shadow-2xl bg-black bg-opacity-80 h-20 justify-end">
-          <div className="container flex items-center" />
-
+        <div className="flex justify-end">
+          <div className="flex items-center" />
           {!firebase.isLoggedIN() && (
             <div className="flex items-center">
               <PositionedMenu
@@ -76,9 +75,6 @@ const Layout = ({ children, page }) => {
                 <div className="px-5">
                   <MailIcon sx={{ color: "white" }} />
                 </div>
-                {/* <p className="text-sm text-center mr-5  ">
-                  {`${user.displayName}`}
-                </p> */}
               </div>
               <div className="py-2">
                 <Avatar
