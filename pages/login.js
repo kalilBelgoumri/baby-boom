@@ -8,7 +8,9 @@ import background from "../assets/login.webp";
 import Image from "next/image";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import Checkbox from "@mui/material/Checkbox";
-
+import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
+import CardLogin from "../components/CardLogin";
+import PersonAddAltRoundedIcon from "@mui/icons-material/PersonAddAltRounded";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -73,21 +75,19 @@ export default function Login() {
 
   return (
     <>
-      <Image
-        src={background}
-        objectFit="cover"
-        objectPosition="center"
-        layout="responsive"
-        id="background"
-        height={100}
-        width={100}
-      />
       <Head>
         <title>Login | Baby-Boom</title>
       </Head>
-      <main className="flex flex-col items-center justify-center mt-20 overflow-auto ">
+      <div className="flex items-center mt-10">
+        <div className="">
+          <HomeRoundedIcon className="cursor-pointer" fontSize="large" />
+        </div>
+        <div className="mx-auto">
+          <h1 className="text-center">Connexion</h1>
+        </div>
+      </div>
+      <main className="flex gap-5 flex-col items-center justify-center h-screen md:flex-row">
         <Form
-          className="z-20"
           name="login"
           style={{ width: "100%", maxWidth: 350 }}
           initialValues={{ remember: true }}
@@ -178,6 +178,18 @@ export default function Login() {
             </p>
           </div>
         </Form>
+        <CardLogin
+          avatar={<PersonAddAltRoundedIcon fontSize="large" />}
+          typo1="Pas encore de compte ? inscrivez vous vite !"
+          typo2="test2"
+          typo3="test3"
+          typo4="test4"
+        />
+        {/* 
+            <div className="w-screen h-screen">
+              <Image src={background} layout="responsive" id="background" />
+            </div>
+           */}
       </main>
     </>
   );
