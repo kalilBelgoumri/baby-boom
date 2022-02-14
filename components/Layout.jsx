@@ -16,18 +16,19 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 const Layout = ({ children, page }) => {
   const router = useRouter();
   const [isOpen, setOpen] = useState(false);
+  const user = firebase.auth.currentUser;
   // const [user, setUser] = useState(null);
 
-  const user = firebase.auth.currentUser;
-  if (user !== null) {
-    // The user object has basic properties such as display name, email, etc.
-    user.displayName;
-    user.email;
-    user.photoURL;
-    user.emailVerified;
-    user.uid;
-    console.log(`${user.displayName}`);
-  }
+  useEffect(() => {
+    user !== null
+      ? user.displayName &&
+        user.email &&
+        user.photoURL &&
+        user.emailVerified &&
+        user.uid
+      : null;
+  }, []);
+
   return (
     <div className="flex flex-col h-screen">
       <Head>

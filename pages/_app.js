@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import firebase from "../firebase/Firebase";
 import { Spin } from "antd";
 import "semantic-ui-css/semantic.min.css";
-import Layout from "../components/Layout";
 
 function MyApp({ Component, pageProps }) {
   const [firebaseInitialized, setFirebaseInitialized] = useState(false);
@@ -17,15 +16,13 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      <Layout>
-        {!firebaseInitialized ? (
-          <div className="fullscreenflexmiddle">
-            <Spin />
-          </div>
-        ) : (
-          <Component {...pageProps} />
-        )}
-      </Layout>
+      {!firebaseInitialized ? (
+        <div className="fullscreenflexmiddle">
+          <Spin />
+        </div>
+      ) : (
+        <Component {...pageProps} />
+      )}
     </>
   );
 }

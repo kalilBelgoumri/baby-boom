@@ -4,7 +4,7 @@ import { MailOutlined, LockOutlined } from "@ant-design/icons";
 import firebase from "../firebase/Firebase";
 import Router from "next/router";
 import { useState, useEffect } from "react";
-import background from "../assets/login.jpg";
+import background from "../assets/login.webp";
 import Image from "next/image";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import Checkbox from "@mui/material/Checkbox";
@@ -65,14 +65,6 @@ export default function Login() {
     }
   }
 
-  // function handleFormSubmit ()  {
-
-  //   localStorage.setItem('rememberMe',rememberMe);
-  //   localStorage.setItem('email', rememberMe ? email : '');
-  //   localStorage.setItem('passsword', rememberMe ? password : '');
-
-  // };
-
   useEffect(() => {
     // storing input name
     localStorage.setItem("email", JSON.stringify(email));
@@ -81,12 +73,11 @@ export default function Login() {
 
   return (
     <>
-      .
       <Image
         src={background}
         objectFit="cover"
         objectPosition="center"
-        layout="fill"
+        layout="responsive"
         id="background"
         height={100}
         width={100}
@@ -114,15 +105,6 @@ export default function Login() {
 
           {/* Checkbox */}
           <div className="chekbox flex justify-end">
-            {/* <input
-              type="checkbox"
-              name="rememberMe"
-              onChange={((e) => setChecked(e.target.checked), onChangeChecked)}
-              value={checked}
-              checkedOk={checked}
-            />
-            Enregistrer */}
-
             <Checkbox
               checked={checked}
               onChange={handleChange}
@@ -145,7 +127,6 @@ export default function Login() {
               placeholder="Password"
             />
           </Form.Item>
-
           <div className="chekbox flex justify-end ">
             <p
               type="primary"
@@ -187,22 +168,17 @@ export default function Login() {
             </Button>
           </Form.Item>
           <div className="noRegistrer flex justify-center flex-row">
-            <p>
-              Pas encore enrigistrer ?{" "}
-              <p
-                className="text-red-500 text-center font-bold ml-3 cursor-pointer"
-                onClick={() => Router.push("/create-account")}
-              >
-                Cliquer ici
-              </p>
+            <p> Pas encore enrigistrer ? </p>
+
+            <p
+              className="text-red-500 text-center font-bold ml-3 cursor-pointer"
+              onClick={() => Router.push("/create-account")}
+            >
+              Cliquer ici
             </p>
           </div>
         </Form>
       </main>
-      {/* <footer className="absolute">
-        <Footer />
-        <p>Baby-Boom 2021 tous droit reservé</p>
-      </footer> */}
     </>
   );
 }
