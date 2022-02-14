@@ -15,33 +15,17 @@ export default function index() {
   const user = firebase.auth.currentUser;
 
   // Get infos from firebase
+  // const docRef = db
+  //   .collection("users")
+  //   .doc(user.uid)
+  //   .onSnapshot((doc) => {
+  //     console.log("Current data: ", doc.data());
+  //   });
 
-  // useEffect(() => {
-  //   if (user) {
-  //     const intervalId = setInterval(() => {
-  //       db.collection("users")
-  //         .get()
-  //         .then((data) => {
-  //           setNotesArray(
-  //             data.docs.map((note) => {
-  //               return { ...note.data() };
-  //             })
-  //           );
-  //           console.log();
-  //         });
-  //     }, 6000);
-  //     return () => clearInterval(intervalId);
-  //   } else {
-  //     null;
-  //   }
-  // }, []);
-
-  const docRef = db.collection("users").doc(user.uid);
   useEffect(() => {
-    setTimeout(forceUpdate, 2000);
-    docRef
-      .get()
-      .then((doc) => {
+    db.collection("users")
+      .doc(user.uid)
+      .onSnapshot((doc) => {
         if (doc.exists) {
           const myData = doc.data();
           setNotesArray(myData);
@@ -50,9 +34,6 @@ export default function index() {
           // doc.data() will be undefined in this case
           console.log("No such document!");
         }
-      })
-      .catch((error) => {
-        console.log("Error getting document:", error);
       });
   }, []);
 
