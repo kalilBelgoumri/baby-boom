@@ -8,7 +8,7 @@ import {
 import firebase from "../firebase/Firebase";
 import Router from "next/router";
 import { useState, useEffect } from "react";
-import background from "../assets/login.webp";
+// import background from "../public/assets/login.webp";
 import Image from "next/image";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
@@ -94,8 +94,8 @@ export default function Login() {
           </div>
         </div>
       </Header>
-      <main className="">
-        <div className="flex gap-5 flex-col items-center justify-center h-screen md:flex-row">
+      <main className="login__background">
+        <div className="flex overflow-auto gap-5 flex-col items-center justify-center h-screen md:flex-row">
           <Form
             name="login"
             style={{ maxWidth: 450, width: 340 }}
@@ -194,7 +194,7 @@ export default function Login() {
               </Button>
             </Form.Item>
           </Form>
-          <div className="flex">
+          <div className="flex px-10">
             <CardLogin
               avatar={<PersonAddAltRoundedIcon fontSize="large" />}
               typo1="Pas encore de compte ? inscrivez vous vite !"

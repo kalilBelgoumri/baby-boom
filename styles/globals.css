@@ -3,37 +3,47 @@
 @tailwind components;
 @tailwind utilities;
 .ant-input-affix-wrapper {
-  border-radius: 10px !important;
+    border-radius: 10px !important;
 }
 
 .login-form-button {
-  border-radius: 10px !important;
+    border-radius: 10px !important;
 }
 
 #background {
-  filter: blur(10px);
+    filter: blur(10px);
 }
 
 .styleBackground {
-  position: absolute;
-  z-index: 0;
+    position: absolute;
+    z-index: 0;
 }
 
 .MuiTabs-flexContainer {
-  display: flex;
-  align-items: center;
-  padding-right: 10px;
+    display: flex;
+    align-items: center;
+    padding-right: 10px;
 }
 
 @media screen and (max-width: 450px) {
-  .MuiTabs-flexContainer {
-    display: flex;
-    flex-direction: column;
-    transition: all 5s ease-out;
-  }
+    .MuiTabs-flexContainer {
+        display: flex;
+        flex-direction: column;
+        transition: all 5s ease-out;
+    }
 }
 
+
+/* CardLogin */
+
 .css-46bh2p-MuiCardContent-root {
-height:250px;
-max-width:500px
+    height: 250px;
+    max-width: 1000px;
+}
+
+.login__background {
+    background: url(../public/assets/login.webp);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
