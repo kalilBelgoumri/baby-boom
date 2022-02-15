@@ -6,6 +6,8 @@ import Router from "next/router";
 import { useState } from "react";
 import background from "../assets/login.jpg";
 import Image from "next/image";
+import { Header } from "antd/lib/layout/layout";
+import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 
 export default function signup() {
   const [name, setName] = useState("");
@@ -38,6 +40,20 @@ export default function signup() {
       <Head>
         <title>Create-Account | Baby-Boom</title>
       </Head>
+      <Header style={{ backgroundColor: "gray" }}>
+        <div className="flex items-center">
+          <div>
+            <HomeRoundedIcon
+              onClick={() => Router.push("/")}
+              className="cursor-pointer"
+              fontSize="large"
+            />
+          </div>
+          <div className="mx-auto">
+            <h1 className="text-center">Crée votre compte</h1>
+          </div>
+        </div>
+      </Header>
       <div className=" mb-10  ">
         {/* <Image
           src={background}
@@ -50,7 +66,7 @@ export default function signup() {
         /> */}
       </div>
       {error}
-      <main className="fullscreenflexmiddle flex flex-col justify-center items-center">
+      <main className="flex flex-col h-screen justify-center items-center">
         <h2 style={{ fontSize: 25, marginBottom: 30 }}>Crée votre compte</h2>
         <Form
           onSubmit={onSubmit}

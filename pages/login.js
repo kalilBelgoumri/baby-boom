@@ -1,16 +1,22 @@
 import Head from "next/head";
-import { Form, Modal, Input, Button, message } from "antd";
-import { MailOutlined, LockOutlined } from "@ant-design/icons";
+import { Form, Modal, Input, Button, message, Checkbox } from "antd";
+import {
+  MailOutlined,
+  LockOutlined,
+  DownloadOutlined,
+} from "@ant-design/icons";
 import firebase from "../firebase/Firebase";
 import Router from "next/router";
 import { useState, useEffect } from "react";
 import background from "../assets/login.webp";
 import Image from "next/image";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
-import Checkbox from "@mui/material/Checkbox";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import CardLogin from "../components/CardLogin";
 import PersonAddAltRoundedIcon from "@mui/icons-material/PersonAddAltRounded";
+import HowToRegRoundedIcon from "@mui/icons-material/HowToRegRounded";
+import { Header } from "antd/lib/layout/layout";
+
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -78,114 +84,138 @@ export default function Login() {
       <Head>
         <title>Login | Baby-Boom</title>
       </Head>
-      <div className="flex items-center mt-10">
-        <div className="">
-          <HomeRoundedIcon className="cursor-pointer" fontSize="large" />
-        </div>
-        <div className="mx-auto">
-          <h1 className="text-center">Connexion</h1>
-        </div>
-      </div>
-      <main className="flex gap-5 flex-col items-center justify-center h-screen md:flex-row">
-        <Form
-          name="login"
-          style={{ width: "100%", maxWidth: 350 }}
-          initialValues={{ remember: true }}
-          onFinish={doLogin} // When click the Login Button
-        >
-          <Form.Item name="email" rules={[{ required: true, message: "" }]}>
-            <Input
-              size="large"
-              prefix={<MailOutlined />}
-              placeholder="Email"
-              values={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </Form.Item>
-
-          {/* Checkbox */}
-          <div className="chekbox flex justify-end">
-            <Checkbox
-              checked={checked}
-              onChange={handleChange}
-              inputProps={{ "aria-label": "controlled" }}
-            />
+      <Header style={{ backgroundColor: "gray" }}>
+        <div className="flex items-center">
+          <div>
+            <HomeRoundedIcon className="cursor-pointer" fontSize="large" />
           </div>
-
-          {/* Password */}
-          <Form.Item name="password" rules={[{ required: true, message: "" }]}>
-            {/* Password */}
-            <Input.Password
-              values={password}
-              onChange={(e) => setPassword(e.target.value)}
-              size="large"
-              iconRender={(visible) =>
-                visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
-              }
-              prefix={<LockOutlined />}
-              type="password"
-              placeholder="Password"
-            />
-          </Form.Item>
-          <div className="chekbox flex justify-end ">
-            <p
-              type="primary"
-              className="cursor-pointer text-white"
-              onClick={() => setVisible(true)}
-            >
-              Mot de passe oublié ?
-            </p>
+          <div className="mx-auto">
+            <h1 className="text-center">Connexion</h1>
           </div>
-          <Modal
-            title="Merci de renseigner votre adresse email pour la reinitialisation de votre mot de passe ! "
-            values={email}
-            centered
-            visible={visible}
-            onChange={setEmail}
-            onOk={(() => setVisible(false), sendPasswordReset)}
-            onCancel={() => setVisible(false)}
-            width={1000}
+        </div>
+      </Header>
+      <main className="">
+        <div className="flex gap-5 flex-col items-center justify-center h-screen md:flex-row">
+          <Form
+            name="login"
+            style={{ maxWidth: 450, width: 340 }}
+            initialValues={{ remember: true }}
+            onFinish={doLogin} // When click the Login Button
           >
             <Form.Item name="email" rules={[{ required: true, message: "" }]}>
               <Input
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
                 size="large"
                 prefix={<MailOutlined />}
                 placeholder="Email"
+                values={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </Form.Item>
-          </Modal>
-          <Form.Item>
-            <Button
-              size="large"
-              type="primary"
-              htmlType="submit"
-              className="login-form-button rounded-3xl"
-              block
-            >
-              Connexion
-            </Button>
-          </Form.Item>
-          <div className="noRegistrer flex justify-center flex-row">
-            <p> Pas encore enrigistrer ? </p>
 
-            <p
-              className="text-red-500 text-center font-bold ml-3 cursor-pointer"
-              onClick={() => Router.push("/create-account")}
+            {/* Checkbox */}
+            {/* <div className="chekbox flex justify-end">
+              <Checkbox
+                checked={checked}
+                onChange={handleChange}
+                inputProps={{ "aria-label": "controlled" }}
+              />
+            </div> */}
+
+            {/* Password */}
+            <Form.Item
+              name="password"
+              rules={[{ required: true, message: "" }]}
             >
-              Cliquer ici
-            </p>
+              {/* Password */}
+              <Input.Password
+                values={password}
+                onChange={(e) => setPassword(e.target.value)}
+                size="large"
+                iconRender={(visible) =>
+                  visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+                }
+                prefix={<LockOutlined />}
+                type="password"
+                placeholder="Password"
+              />
+            </Form.Item>
+            <div className="">
+              <Form.Item
+                name="remember"
+                checked={checked}
+                onChange={handleChange}
+                valuePropName="checked"
+                wrapperCol={{
+                  offset: 0,
+                  span: 16,
+                }}
+              >
+                <Checkbox>Se souvenir</Checkbox>
+              </Form.Item>
+            </div>
+            <div className="chekbox flex justify-end ">
+              <p
+                type="primary"
+                className="cursor-pointer text-black"
+                onClick={() => setVisible(true)}
+              >
+                Mot de passe oublié ?
+              </p>
+            </div>
+            <Modal
+              title="Merci de renseigner votre adresse email pour la reinitialisation de votre mot de passe ! "
+              values={email}
+              centered
+              visible={visible}
+              onChange={setEmail}
+              onOk={(() => setVisible(false), sendPasswordReset)}
+              onCancel={() => setVisible(false)}
+              width={1000}
+            >
+              <Form.Item name="email" rules={[{ required: true, message: "" }]}>
+                <Input
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  size="large"
+                  prefix={<MailOutlined />}
+                  placeholder="Email"
+                />
+              </Form.Item>
+            </Modal>
+            <Form.Item>
+              <Button
+                size="large"
+                type="primary"
+                htmlType="submit"
+                className="login-form-button rounded-3xl"
+                block
+              >
+                Connexion
+              </Button>
+            </Form.Item>
+          </Form>
+          <div className="flex">
+            <CardLogin
+              avatar={<PersonAddAltRoundedIcon fontSize="large" />}
+              typo1="Pas encore de compte ? inscrivez vous vite !"
+              typo2="  Des centaines d'annonces proches de chez vous
+            "
+              typo3="Inscription et consultation 100% gratuite"
+              typo4="Création du compte en moins d'une minute"
+              btn={
+                <Button
+                  onClick={() => Router.push("/create-account")}
+                  type="secondary"
+                  shape="round"
+                  size="middle"
+                  icon={<HowToRegRoundedIcon />}
+                >
+                  Crée un compte
+                </Button>
+              }
+            />
           </div>
-        </Form>
-        <CardLogin
-          avatar={<PersonAddAltRoundedIcon fontSize="large" />}
-          typo1="Pas encore de compte ? inscrivez vous vite !"
-          typo2="  Des centaines d'annonces proches de chez vous
-          "
-          typo3="Inscription et consultation 100% gratuite"
-          typo4="Création du compte en moins d'une minute"
-        />
+        </div>
         {/* 
             <div className="w-screen h-screen">
               <Image src={background} layout="responsive" id="background" />

@@ -1,13 +1,12 @@
 import firebase from "firebase";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyATKyTSJVN7-Zx60WQ66kkHo3nBhuMhYDs",
-  authDomain: "meteor-3fd94.firebaseapp.com",
-  projectId: "meteor-3fd94",
-  storageBucket: "meteor-3fd94.appspot.com",
-  messagingSenderId: "391620415322",
-  appId: "1:391620415322:web:6848292646d9e91e6e6d63",
-  measurementId: "G-69J20TCH7X",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_DB_PUBLIC_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_DB_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_DB_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_DB_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_DB_MESSAGNG_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_DB_MESSAGNG_APP_ID,
 };
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);

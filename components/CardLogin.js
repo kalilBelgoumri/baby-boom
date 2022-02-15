@@ -14,12 +14,12 @@ const bull = (
   </Box>
 );
 
-export default function CardLogin({ avatar, typo1, typo2, typo3, typo4 }) {
+export default function CardLogin({ btn, avatar, typo1, typo2, typo3, typo4 }) {
   return (
-    <div className="px-10">
-      <Card className="">
+    <div className="">
+      <Card>
         <CardContent className="flex flex-col">
-          <div className="flex">
+          <div>
             <Typography
               sx={{ fontSize: 20, textAlign: "center" }}
               color="text.black"
@@ -27,22 +27,25 @@ export default function CardLogin({ avatar, typo1, typo2, typo3, typo4 }) {
             >
               <div className="flex gap-3 items-center">
                 <div className="flex">{avatar}</div>
-                <div className="flex text-sm md:text-lg">{typo1}</div>
+                <div className="flex text-sm lg:text-lg">{typo1}</div>
               </div>
             </Typography>
           </div>
-          <div className="flex flex-col justify-center mt-10">
+          <div className="flex flex-col justify-center mt-10 mb-5">
             <Typography sx={{ mb: 2 }} color="text.secondary">
-              <div className="flex text-sm md:text-lg">{typo2}</div>
+              <div className="flex text-sm lg:text-lg">{typo2}</div>
             </Typography>
             <Typography sx={{ mb: 2 }} color="text.secondary">
-              <div className="flex text-sm md:text-lg">{typo3}</div>
+              <div className="flex text-sm lg:text-lg">{typo3}</div>
             </Typography>
             <Typography sx={{ mb: 2 }} color="text.secondary">
-              <div className="flex text-sm md:text-lg">{typo4}</div>
+              <div className="flex text-sm lg:text-lg">{typo4}</div>
             </Typography>
           </div>
         </CardContent>
+        <div className="mb-10">
+          <div className="flex justify-center">{btn}</div>
+        </div>
       </Card>
     </div>
   );

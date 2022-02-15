@@ -12,6 +12,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
+import { Header } from "antd/lib/layout/layout";
 
 const Layout = ({ children, page }) => {
   const router = useRouter();
@@ -34,7 +35,7 @@ const Layout = ({ children, page }) => {
       <Head>
         <title>{page}</title>
       </Head>
-      <header>
+      <Header style={{ backgroundColor: "gray" }}>
         <div className="flex justify-end">
           <div className="flex items-center" />
           {!firebase.isLoggedIN() && (
@@ -71,7 +72,7 @@ const Layout = ({ children, page }) => {
           )}
           {firebase.isLoggedIN() && (
             <div className="flex items-center">
-              <div className="mr-5 cursor-pointer flex">
+              <div className="mr-5 cursor-pointer flex items-center">
                 <NotificationsNoneIcon sx={{ color: "white" }} />
                 <div className="px-5">
                   <MailIcon sx={{ color: "white" }} />
@@ -121,7 +122,7 @@ const Layout = ({ children, page }) => {
             </div>
           )}
         </div>
-      </header>
+      </Header>
       <main className="flex-1">{children} </main>
       <Footer />
     </div>
