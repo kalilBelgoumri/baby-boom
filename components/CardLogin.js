@@ -16,26 +16,34 @@ const bull = (
 
 export default function CardLogin({ avatar, typo1, typo2, typo3, typo4 }) {
   return (
-    <Card sx={{ minWidth: 500, minHeight: 275 }}>
-      <CardContent className="flex flex-col">
-        <div className="flex">
-          <Typography
-            sx={{ fontSize: 20, textAlign: "center" }}
-            color="text.black"
-            gutterBottom
-          >
-            {avatar}
-            {typo1}
-          </Typography>
-        </div>
-        <Typography variant="h4" component="div">
-          {typo2}
-        </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          {typo3}
-        </Typography>
-        <Typography variant="body2">{typo4}</Typography>
-      </CardContent>
-    </Card>
+    <div className="px-10">
+      <Card className="">
+        <CardContent className="flex flex-col">
+          <div className="flex">
+            <Typography
+              sx={{ fontSize: 20, textAlign: "center" }}
+              color="text.black"
+              gutterBottom
+            >
+              <div className="flex gap-3 items-center">
+                <div className="flex">{avatar}</div>
+                <div className="flex text-sm md:text-lg">{typo1}</div>
+              </div>
+            </Typography>
+          </div>
+          <div className="flex flex-col justify-center mt-10">
+            <Typography sx={{ mb: 2 }} color="text.secondary">
+              <div className="flex text-sm md:text-lg">{typo2}</div>
+            </Typography>
+            <Typography sx={{ mb: 2 }} color="text.secondary">
+              <div className="flex text-sm md:text-lg">{typo3}</div>
+            </Typography>
+            <Typography sx={{ mb: 2 }} color="text.secondary">
+              <div className="flex text-sm md:text-lg">{typo4}</div>
+            </Typography>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   );
 }

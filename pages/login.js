@@ -181,9 +181,10 @@ export default function Login() {
         <CardLogin
           avatar={<PersonAddAltRoundedIcon fontSize="large" />}
           typo1="Pas encore de compte ? inscrivez vous vite !"
-          typo2="test2"
-          typo3="test3"
-          typo4="test4"
+          typo2="  Des centaines d'annonces proches de chez vous
+          "
+          typo3="Inscription et consultation 100% gratuite"
+          typo4="Création du compte en moins d'une minute"
         />
         {/* 
             <div className="w-screen h-screen">

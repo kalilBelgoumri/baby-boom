@@ -32,3 +32,8 @@
     transition: all 5s ease-out;
   }
 }
+
+.MuiPaper-root {
+height:30vh;
+min-width:40vh
+}
