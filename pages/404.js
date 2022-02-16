@@ -1,7 +1,7 @@
 import { Result, Button } from "antd";
 import Router from "next/router";
 import { useEffect } from "react";
-export default function notFound() {
+export default function NotFound() {
   useEffect(() => {
     setTimeout(() => {
       Router.push("/");

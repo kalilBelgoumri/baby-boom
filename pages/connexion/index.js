@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { Alert } from "antd";
 
 export default function Home() {
   const [email, setEmail] = useState("");

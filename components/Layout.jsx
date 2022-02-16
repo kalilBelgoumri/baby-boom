@@ -62,9 +62,7 @@ const Layout = ({ children, page }) => {
                     >
                       <AccountCircleIcon />
                     </IconButton>
-                    <p className="text-sm font-bold text-black">
-                      S'enregistrer
-                    </p>
+                    <p className="text-sm font-bold text-black">Senregistrer</p>
                   </div>
                 }
               />
